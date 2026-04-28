@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JsonFormatter from "../../features/json-formatter/JsonFormatter";
+---
+
+<BaseLayout title="JSON Formatter">
+  <h2 class="mb-6 text-2xl font-semibold">JSON Formatter</h2>
+
+  <JsonFormatter client:load />
+</BaseLayout>

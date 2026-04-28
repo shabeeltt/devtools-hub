@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+
+const { title = "DevToolsHub" } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+
+  <body class="min-h-screen bg-slate-950 text-white">
+    <header class="border-b border-slate-800 p-4">
+      <div class="mx-auto max-w-5xl">
+        <h1 class="text-xl font-bold">DevToolsHub</h1>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-6 py-10">
+      <slot />
+    </main>
+  </body>
+</html>
