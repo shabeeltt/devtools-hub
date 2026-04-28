@@ -14,22 +14,48 @@ export default function JsonFormatter() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <textarea
-        className="rounded p-3 text-black"
-        rows={10}
-        placeholder="paste json here"
-        value={input}
-        onChange={(event) => setInput(event.target.value)}
-      />
+    <div className="space-y-6">
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-neutral-400">Input JSON</label>
+          <textarea
+            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 text-sm font-mono text-white outline-none focus:border-blue-500/50 transition-colors"
+            rows={15}
+            placeholder='Paste your JSON here (e.g. {"name": "DevToolsHub"})'
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+          />
+        </div>
 
-      <button className="rounded bg-blue-500 px-4 py-2" onClick={formatJson}>
-        format
-      </button>
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-neutral-400">Formatted Output</label>
+          <div className="relative group">
+            <textarea
+              readOnly
+              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 text-sm font-mono text-blue-400 outline-none"
+              rows={15}
+              value={output}
+            />
+            {output && output !== "invalid json" && (
+              <button
+                onClick={() => navigator.clipboard.writeText(output)}
+                className="absolute right-4 top-4 rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-neutral-700 transition-colors"
+              >
+                Copy
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
 
-      <pre className="rounded bg-slate-800 p-4 whitespace-pre-wrap">
-        {output}
-      </pre>
+      <div className="flex justify-center">
+        <button
+          className="rounded-full bg-blue-600 px-8 py-3 font-semibold text-white transition-all hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95"
+          onClick={formatJson}
+        >
+          Format JSON
+        </button>
+      </div>
     </div>
   );
 }
