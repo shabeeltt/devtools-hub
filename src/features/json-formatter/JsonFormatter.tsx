@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [copied, setCopied] = useState(false);
 
   function formatJson() {
     try {
@@ -38,10 +39,17 @@ export default function JsonFormatter() {
             />
             {output && output !== "invalid json" && (
               <button
-                onClick={() => navigator.clipboard.writeText(output)}
+                onClick={() => {
+                  navigator.clipboard.writeText(output);
+                  setCopied(true);
+
+                  setTimeout(() => {
+                    setCopied(false);
+                  }, 2000);
+                }}
                 className="absolute right-4 top-4 rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white hover:bg-neutral-700 transition-colors"
               >
-                Copy
+                {copied ? "Copied" : "Copy"}
               </button>
             )}
           </div>
