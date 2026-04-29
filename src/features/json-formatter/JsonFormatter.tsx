@@ -14,6 +14,11 @@ export default function JsonFormatter() {
     }
   }
 
+  function clear() {
+    setInput("");
+    setOutput("");
+  }
+
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2">
@@ -74,12 +79,18 @@ export default function JsonFormatter() {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-4">
         <button
           className="rounded-full bg-blue-600 px-8 py-3 font-semibold text-white transition-all hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20 active:scale-95"
           onClick={formatJson}
         >
           Format JSON
+        </button>
+        <button
+          className="rounded-full bg-neutral-600 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-700 hover:shadow-lg hover:shadow-neutral-500/20 active:scale-95"
+          onClick={clear}
+        >
+          Clear
         </button>
       </div>
     </div>
