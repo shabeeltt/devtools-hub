@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UrlConverterComponent from "../../features/url-converter/UrlConverter.tsx"
+---
+
+<BaseLayout title="URL Encoder & Decoder">
+  <h2 class="mb-6 text-2xl font-semibold">
+    URL Encoder & Decoder
+  </h2>
+
+  <UrlConverterComponent client:load />
+</BaseLayout>
