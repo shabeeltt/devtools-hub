@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Base64ConverterTool from "../../features/base64-converter/Base64Converter";
+---
+
+<BaseLayout title="Base64 Encoder & Decoder">
+  <h2 class="mb-6 text-2xl font-semibold">
+    Base64 Encoder & Decoder
+  </h2>
+
+  <Base64ConverterTool client:load />
+</BaseLayout>
