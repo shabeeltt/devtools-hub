@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UuidGenerator from "../../features/uuid-generator/UuidGenerator.tsx"
+---
+
+<BaseLayout title="UUID Generator">
+  <h2 class="mb-6 text-2xl font-semibold">
+    UUID Generator
+  </h2>
+
+  <UuidGenerator client:load />
+</BaseLayout>
