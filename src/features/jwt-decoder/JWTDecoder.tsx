@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ToolTextarea from "../../components/tool/ToolTextarea";
 
 type DecodedJwt = {
   header: unknown;
@@ -125,26 +126,22 @@ export default function JWTDecoder() {
     <div className="space-y-6">
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-neutral-400">
-            Encoded JWT
-          </label>
-
-          <button
-            type="button"
-            onClick={loadSample}
-            className="text-xs font-medium text-blue-500 transition-colors hover:text-blue-400"
-          >
-            Sample
-          </button>
+          <ToolTextarea
+            label="Encoded JWT"
+            value={input}
+            onChange={setInput}
+            placeholder="Paste your JWT here"
+            rows={6}
+            rightLabel={
+              <button
+                onClick={loadSample}
+                className="text-xs text-blue-500 hover:text-blue-400"
+              >
+                Sample
+              </button>
+            }
+          />
         </div>
-
-        <textarea
-          className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none transition-colors focus:border-blue-500/50"
-          rows={4}
-          placeholder="Paste your JWT here"
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-        />
       </div>
 
       <div className="flex flex-col justify-center gap-3 sm:flex-row">

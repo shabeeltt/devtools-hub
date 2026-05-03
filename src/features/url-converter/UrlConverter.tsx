@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ToolTextarea from "../../components/tool/ToolTextarea";
 
 export default function UrlConverter() {
   const [input, setInput] = useState("");
@@ -98,50 +99,41 @@ export default function UrlConverter() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <label className="text-sm text-neutral-400">Input</label>
 
+        {/*Input */}
+        <ToolTextarea
+          label="Input"
+          value={input}
+          onChange={setInput}
+          placeholder="Enter text or encoded URL"
+          rows={15}
+          rightLabel={
             <button
-              type="button"
               onClick={loadSample}
               className="text-xs text-blue-500 hover:text-blue-400"
             >
               Sample
             </button>
-          </div>
+          }
+        />
 
-          <textarea
-            rows={15}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter text or encoded URL"
-            className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none focus:border-blue-500/50"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm text-neutral-400">Output</label>
-
-          <div className="relative">
-            <textarea
-              readOnly
-              rows={15}
-              value={output}
-              className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400"
-            />
-
-            {canUseOutput && (
-              <button
-                type="button"
-                onClick={copy}
-                className="absolute right-4 top-4 rounded bg-neutral-800 px-3 py-1 text-xs text-white hover:bg-neutral-700"
-              >
-                {copied ? "Copied" : "Copy"}
-              </button>
-            )}
-          </div>
-        </div>
+        {/*Output */}
+        <ToolTextarea
+          label="Output"
+          value={output}
+          readOnly
+          rows={15}
+          textColor="accent"
+        >
+          {canUseOutput && (
+            <button
+              onClick={copy}
+              className="absolute right-4 top-4 rounded bg-neutral-800 px-3 py-1 text-xs text-white hover:bg-neutral-700"
+            >
+              {copied ? "Copied" : "Copy"}
+            </button>
+          )}
+        </ToolTextarea>
       </div>
 
       <div className="flex justify-center gap-4">

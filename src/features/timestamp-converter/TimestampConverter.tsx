@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ToolTextarea from "../../components/tool/ToolTextarea";
 
 export default function TimestampConverter() {
   const [input, setInput] = useState("");
@@ -114,15 +115,13 @@ export default function TimestampConverter() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <label className="text-sm font-medium text-neutral-400">Input</label>
-
-        <textarea
-          className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none transition-colors focus:border-blue-500/50"
-          rows={6}
-          placeholder="Enter timestamp or date (e.g. 1714700000 or 2024-05-03)"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+          <ToolTextarea
+            label="Input"
+            value={input}
+            onChange={setInput}
+            placeholder="Enter timestamp or date (e.g. 1714700000 or 2024-05-03)"
+            rows={6}
+          />
       </div>
 
       <div className="flex flex-col justify-center gap-3 sm:flex-row">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ToolTextarea from "../../components/tool/ToolTextarea";
 
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
@@ -68,66 +69,41 @@ export default function JsonFormatter() {
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-neutral-400">
-              Input JSON
-            </label>
 
+        {/*Input */}
+        <ToolTextarea
+          label="Input"
+          value={input}
+          onChange={setInput}
+          placeholder="Paste your JSON here (e.g. {'name': 'DevToolsHub'})"
+          rows={15}
+          rightLabel={
             <button
-              type="button"
               onClick={loadSample}
-              className="text-xs font-medium text-blue-500 transition-colors hover:text-blue-400"
+              className="text-xs text-blue-500 hover:text-blue-400"
             >
               Sample
             </button>
-          </div>
+          }
+        />
 
-          <textarea
-            className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none transition-colors focus:border-blue-500/50"
-            rows={15}
-            placeholder='Paste your JSON here (e.g. {"name": "DevToolsHub"})'
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-neutral-400">
-              Formatted Output
-            </label>
-          </div>
-
-          <div className="relative group">
-            <textarea
-              readOnly
-              className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none"
-              rows={15}
-              value={output}
-            />
-
-            {canUseOutput && (
-              <div className="absolute right-4 top-4 flex gap-2">
-                <button
-                  type="button"
-                  onClick={downloadJson}
-                  className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-                >
-                  Download
-                </button>
-
-                <button
-                  type="button"
-                  onClick={copyOutput}
-                  className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-                >
-                  {copied ? "Copied" : "Copy"}
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
+        {/*Output */}
+        <ToolTextarea
+          label="Output"
+          value={output}
+          readOnly
+          rows={15}
+          textColor="accent"
+        >
+          {canUseOutput && (
+            <button
+              onClick={copyOutput}
+              className="absolute right-4 top-4 rounded bg-neutral-800 px-3 py-1 text-xs text-white hover:bg-neutral-700"
+            >
+              {copied ? "Copied" : "Copy"}
+            </button>
+          )}
+        </ToolTextarea>
       </div>
 
       <div className="flex justify-center gap-4">
