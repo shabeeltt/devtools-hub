@@ -11,41 +11,44 @@ const tools = [
   <path d="M8 6c-2 0-2 3-2 6s0 6 2 6"/>
   <path d="M16 6c2 0 2 3 2 6s0 6-2 6"/>
   <path d="M12 8v8"/>
-</svg>`
+</svg>`,
   },
   {
-  name: "Base64 Encoder & Decoder",
-  description: "Encode and decode Base64 strings easily.",
-  href: "/tools/base64-converter",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    name: "Base64 Encoder & Decoder",
+    description: "Encode and decode Base64 strings easily.",
+    href: "/tools/base64-converter",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M4 7h16M4 12h10M4 17h6"/>
     <path d="M18 12l3 3-3 3"/>
-  </svg>`
-},
- {
+  </svg>`,
+  },
+  {
     name: "URL Encoder & Decoder",
     description: "Encode and decode URL-safe text and query strings.",
     href: "/tools/url-converter",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l2-2a5 5 0 0 0-7.07-7.07l-1.14 1.14"/><path d="M14 11a5 5 0 0 0-7.54-.54l-2 2a5 5 0 0 0 7.07 7.07l1.14-1.14"/></svg>`
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l2-2a5 5 0 0 0-7.07-7.07l-1.14 1.14"/><path d="M14 11a5 5 0 0 0-7.54-.54l-2 2a5 5 0 0 0 7.07 7.07l1.14-1.14"/></svg>`,
   },
   {
     name: "UUID Generator",
     description: "Generate UUID v4 values instantly",
     href: "/tools/uuid-generator",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`,
   },
   {
     name: "JWT Decoder",
     description: "Decode and inspect JSON Web Tokens locally.",
     href: "/tools/jwt-decoder",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
   },
   {
     name: "Unix Timestamp Converter",
-    description: "Convert Unix epoch timestamps to human-readable dates.",
+    description: "Convert timestamps to readable dates and back.",
     href: "/tools/timestamp-converter",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
-  }
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <polyline points="12 6 12 12 16 14"/>
+  </svg>`,
+  },
 ];
 ---
 
@@ -60,24 +63,22 @@ const tools = [
   </div>
 
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {tools.map((tool) => (
-      <a
-        href={tool.href}
-        class="group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 p-6 transition-all hover:border-blue-500/50 hover:bg-neutral-800/50"
-      >
-        <div
-          class="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors"
-          set:html={tool.icon}
-        />
+    {
+      tools.map((tool) => (
+        <a
+          href={tool.href}
+          class="group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 p-6 transition-all hover:border-blue-500/50 hover:bg-neutral-800/50"
+        >
+          <div
+            class="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-colors"
+            set:html={tool.icon}
+          />
 
-        <h3 class="text-lg font-semibold text-white mb-2">
-          {tool.name}
-        </h3>
+          <h3 class="text-lg font-semibold text-white mb-2">{tool.name}</h3>
 
-        <p class="text-sm text-neutral-400">
-          {tool.description}
-        </p>
-      </a>
-    ))}
+          <p class="text-sm text-neutral-400">{tool.description}</p>
+        </a>
+      ))
+    }
   </div>
 </BaseLayout>
