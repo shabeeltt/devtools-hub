@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JWTDecoder from "../../features/jwt-decoder/JWTDecoder";
+---
+
+<BaseLayout title="JWT Decoder | DevToolsHub">
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-white tracking-tight mb-2">
+      JWT Decoder
+    </h2>
+    <p class="text-neutral-400">
+      Decode JSON Web Tokens locally and inspect their contents.
+    </p>
+  </div>
+
+  <JWTDecoder client:load />
+</BaseLayout>

@@ -26,12 +26,11 @@ export default function UuidGenerator() {
     return (
         <div className="flex flex-col gap-4">
             <div className="relative">
-                <textarea
+                <input
                     readOnly
                     value={uuid}
                     placeholder="Generated UUID will appear here"
-                    rows={1}
-                    className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none"
+                    className="w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none"
                 />
                 {uuid && (
                     <button
