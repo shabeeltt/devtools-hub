@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TimestampConverter from "../../features/timestamp-converter/TimestampConverter.tsx";
+---
+
+<BaseLayout title="Timestamp Converter">
+  <h2 class="mb-6 text-2xl font-semibold">Timestamp Converter</h2>
+
+  <TimestampConverter client:load />
+</BaseLayout>
