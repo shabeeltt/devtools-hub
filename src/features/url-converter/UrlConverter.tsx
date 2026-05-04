@@ -1,10 +1,10 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
+import CopyButton from "../../components/tool/CopyButton";
 
 export default function UrlConverter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [copied, setCopied] = useState(false);
   const [encodeFullUrl, setEncodeFullUrl] = useState(true);
 
   const hasInput = input.trim().length > 0;
@@ -27,7 +27,6 @@ export default function UrlConverter() {
         : encodeQueryValues(input);
 
       setOutput(result);
-      setCopied(false);
     } catch {
       setOutput("invalid input");
     }
@@ -36,7 +35,6 @@ export default function UrlConverter() {
   function decode() {
     try {
       setOutput(decodeURIComponent(input));
-      setCopied(false);
     } catch {
       setOutput("invalid input");
     }
@@ -52,22 +50,11 @@ export default function UrlConverter() {
       : encodeQueryValues(text);
 
     setOutput(result);
-    setCopied(false);
-  }
-
-  function copy() {
-    if (!canUseOutput) return;
-
-    navigator.clipboard.writeText(output);
-    setCopied(true);
-
-    setTimeout(() => setCopied(false), 2000);
   }
 
   function clear() {
     setInput("");
     setOutput("");
-    setCopied(false);
   }
 
   return (
@@ -126,12 +113,10 @@ export default function UrlConverter() {
           textColor="accent"
         >
           {canUseOutput && (
-            <button
-              onClick={copy}
-              className="absolute right-4 top-4 rounded bg-neutral-800 px-3 py-1 text-xs text-white hover:bg-neutral-700"
-            >
-              {copied ? "Copied" : "Copy"}
-            </button>
+            <CopyButton
+              value={output}
+              className="absolute right-4 top-4"
+            />
           )}
         </ToolTextarea>
       </div>

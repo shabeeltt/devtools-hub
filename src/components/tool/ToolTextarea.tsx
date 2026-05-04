@@ -41,8 +41,7 @@ export default function ToolTextarea({
             textColor === "accent" ? "text-blue-400" : "text-white"
           }`}
         />
-
-        {children}
+            {children}
       </div>
     </div>
   );

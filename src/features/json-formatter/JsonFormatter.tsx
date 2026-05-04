@@ -1,10 +1,10 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
+import CopyButton from "../../components/tool/CopyButton";
 
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [copied, setCopied] = useState(false);
 
   const canUseOutput = output && output !== "invalid json";
 
@@ -32,15 +32,6 @@ export default function JsonFormatter() {
     }
   }
 
-  function copyOutput() {
-    navigator.clipboard.writeText(output);
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  }
-
   function downloadJson() {
     if (!canUseOutput) {
       return;
@@ -63,7 +54,6 @@ export default function JsonFormatter() {
   function clear() {
     setInput("");
     setOutput("");
-    setCopied(false);
   }
 
   return (
@@ -96,12 +86,10 @@ export default function JsonFormatter() {
           textColor="accent"
         >
           {canUseOutput && (
-            <button
-              onClick={copyOutput}
-              className="absolute right-4 top-4 rounded bg-neutral-800 px-3 py-1 text-xs text-white hover:bg-neutral-700"
-            >
-              {copied ? "Copied" : "Copy"}
-            </button>
+            <CopyButton
+              value={output}
+              className="absolute right-4 top-4"
+            />
           )}
         </ToolTextarea>
       </div>

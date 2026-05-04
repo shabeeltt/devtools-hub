@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
+import CopyButton from "../../components/tool/CopyButton";
 
 type DecodedJwt = {
   header: unknown;
@@ -16,7 +17,6 @@ export default function JWTDecoder() {
     signature: "",
     error: null,
   });
-  const [copiedSection, setCopiedSection] = useState<string | null>(null);
 
   const hasInput = input.trim().length > 0;
   const hasOutput =
@@ -99,17 +99,13 @@ export default function JWTDecoder() {
     }
   }
 
-  function copyToClipboard(value: unknown, section: string) {
-    const text =
-      typeof value === "string" ? value : JSON.stringify(value, null, 2);
-
-    navigator.clipboard.writeText(text);
-    setCopiedSection(section);
-
-    setTimeout(() => {
-      setCopiedSection(null);
-    }, 2000);
-  }
+  function formatJson(value: unknown): string {
+    try {
+      return JSON.stringify(value, null, 2);
+    } catch (error) {
+      return "";
+    }
+  };
 
   function clear() {
     setInput("");
@@ -119,7 +115,6 @@ export default function JWTDecoder() {
       signature: "",
       error: null,
     });
-    setCopiedSection(null);
   }
 
   return (
@@ -177,49 +172,37 @@ export default function JWTDecoder() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <div className="flex items-center justify-between">
+          <div className="relative flex items-center justify-between">
             <label className="text-sm font-medium text-neutral-400">
               Header
             </label>
 
             {canUseHeader && (
-              <button
-                type="button"
-                onClick={() => copyToClipboard(decoded.header, "header")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copiedSection === "header" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={formatJson(decoded.header)} />
             )}
           </div>
 
           <pre className="custom-scrollbar h-[260px] w-full overflow-auto rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
             {decoded.header
-              ? JSON.stringify(decoded.header, null, 2)
+              ? formatJson(decoded.header)
               : "Header will appear here"}
           </pre>
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center justify-between">
+          <div className="relative flex items-center justify-between">
             <label className="text-sm font-medium text-neutral-400">
               Payload
             </label>
 
             {canUsePayload && (
-              <button
-                type="button"
-                onClick={() => copyToClipboard(decoded.payload, "payload")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copiedSection === "payload" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={formatJson(decoded.payload)} />
             )}
           </div>
 
           <pre className="custom-scrollbar h-[260px] w-full overflow-auto rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
             {decoded.payload
-              ? JSON.stringify(decoded.payload, null, 2)
+              ? formatJson(decoded.payload)
               : "Payload will appear here"}
           </pre>
         </div>
@@ -232,13 +215,7 @@ export default function JWTDecoder() {
           </label>
 
           {canUseSignature && (
-            <button
-              type="button"
-              onClick={() => copyToClipboard(decoded.signature, "signature")}
-              className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-            >
-              {copiedSection === "signature" ? "Copied" : "Copy"}
-            </button>
+            <CopyButton value={decoded.signature} />
           )}
         </div>
 

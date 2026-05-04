@@ -1,9 +1,9 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
+import CopyButton from "../../components/tool/CopyButton";
 
 export default function TimestampConverter() {
   const [input, setInput] = useState("");
-  const [copied, setCopied] = useState<string | null>(null);
 
   const [output, setOutput] = useState<{
     local: string;
@@ -98,18 +98,6 @@ export default function TimestampConverter() {
       milliseconds: "",
       error: null,
     });
-    setCopied(null);
-  }
-
-  function copy(value: string, key: string) {
-    if (!value) return;
-
-    navigator.clipboard.writeText(value);
-    setCopied(key);
-
-    setTimeout(() => {
-      setCopied(null);
-    }, 2000);
   }
 
   return (
@@ -169,13 +157,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">Local Time</p>
             {output.local && (
-              <button
-                type="button"
-                onClick={() => copy(output.local, "local")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "local" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.local} />
             )}
           </div>
           <p className="font-mono text-sm text-white break-all">
@@ -188,13 +170,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">UTC Time</p>
             {output.utc && (
-              <button
-                type="button"
-                onClick={() => copy(output.utc, "utc")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "utc" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.utc} />
             )}
           </div>
           <p className="font-mono text-sm text-white break-all">
@@ -207,13 +183,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">Unix (seconds)</p>
             {output.seconds && (
-              <button
-                type="button"
-                onClick={() => copy(output.seconds, "seconds")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "seconds" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.seconds} />
             )}
           </div>
           <p className="font-mono text-sm text-white">
@@ -226,13 +196,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">Unix (milliseconds)</p>
             {output.milliseconds && (
-              <button
-                type="button"
-                onClick={() => copy(output.milliseconds, "ms")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "ms" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.milliseconds} />
             )}
           </div>
           <p className="font-mono text-sm text-white">

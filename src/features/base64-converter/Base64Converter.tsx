@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
+import CopyButton from "../../components/tool/CopyButton";
 
 export default function Base64Converter() {
   const [input, setInput] = useState("");
@@ -32,23 +33,9 @@ export default function Base64Converter() {
     setOutput(btoa(sampleText));
   }
 
-  function copyOutput() {
-    if (!canUseOutput) {
-      return;
-    }
-
-    navigator.clipboard.writeText(output);
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  }
-
   function clear() {
     setInput("");
     setOutput("");
-    setCopied(false);
   }
 
   return (
@@ -81,12 +68,10 @@ export default function Base64Converter() {
           textColor="accent"
         >
           {canUseOutput && (
-            <button
-              onClick={copyOutput}
-              className="absolute right-4 top-4 rounded bg-neutral-800 px-3 py-1 text-xs text-white hover:bg-neutral-700"
-            >
-              {copied ? "Copied" : "Copy"}
-            </button>
+            <CopyButton
+              value={output}
+              className="absolute right-4 top-4"
+            />
           )}
         </ToolTextarea>
       </div>
