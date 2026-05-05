@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
-import CopyButton from "../../components/tool/CopyButton";
+import CopyButton from "../../ui/CopyButton";
+import ToolActions from "../../components/tool/ToolActions";
+import Button from "../../ui/Button";
 
 export default function UrlConverter() {
   const [input, setInput] = useState("");
@@ -121,43 +123,32 @@ export default function UrlConverter() {
         </ToolTextarea>
       </div>
 
-      <div className="flex justify-center gap-4">
-        <button
-          type="button"
-          disabled={!hasInput}
+      <ToolActions>
+        <Button
+          isDisabled={!hasInput}
           onClick={encode}
-          className={`rounded-full px-6 py-2 text-white ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500"
-              : "bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Encode
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          disabled={!hasInput}
+        <Button
+          isDisabled={!hasInput}
           onClick={decode}
-          className={`rounded-full px-6 py-2 text-white ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500"
-              : "bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Decode
-        </button>
+        </Button>
 
         {output && (
-          <button
-            type="button"
+          <Button
             onClick={clear}
-            className="rounded-full bg-neutral-600 px-6 py-2 text-white hover:bg-neutral-700"
+            variant="secondary"
           >
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
     </div>
   );
 }

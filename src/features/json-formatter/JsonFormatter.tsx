@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
-import CopyButton from "../../components/tool/CopyButton";
+import ToolActions from "../../components/tool/ToolActions";
+import CopyButton from "../../ui/CopyButton";
+import Button from "../../ui/Button";
 
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
@@ -59,7 +61,6 @@ export default function JsonFormatter() {
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-2">
-
         {/*Input */}
         <ToolTextarea
           label="Input"
@@ -86,38 +87,26 @@ export default function JsonFormatter() {
           textColor="accent"
         >
           {canUseOutput && (
-            <CopyButton
-              value={output}
-              className="absolute right-4 top-4"
-            />
+            <CopyButton value={output} className="absolute right-4 top-4" />
           )}
         </ToolTextarea>
       </div>
 
-      <div className="flex justify-center gap-4">
-        <button
-          type="button"
-          disabled={!hasInput}
-          onClick={formatJson}
-          className={`rounded-full px-8 py-3 font-semibold text-white transition-all active:scale-95 ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
-              : "bg-neutral-700 cursor-not-allowed opacity-50"
-          }`}
+      <ToolActions>
+        <Button 
+          variant="primary" 
+          onClick={formatJson} 
+          isDisabled={!hasInput}
         >
           Format JSON
-        </button>
-        {/* only show clear if any output - even for error */}
+        </Button>
+
         {output && (
-          <button
-            type="button"
-            onClick={clear}
-            className="rounded-full bg-neutral-600 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-700 hover:shadow-lg hover:shadow-neutral-500/20 active:scale-95"
-          >
+          <Button variant="secondary" onClick={clear}>
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
     </div>
   );
 }

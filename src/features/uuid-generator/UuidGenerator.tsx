@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import CopyButton from '../../components/tool/CopyButton';
+import CopyButton from '../../ui/CopyButton';
+import ToolActions from '../../components/tool/ToolActions';
+import Button from '../../ui/Button';
 
 export default function UuidGenerator() {
     const [uuid, setUuid] = useState("");
@@ -31,23 +33,23 @@ export default function UuidGenerator() {
                 )}
             </div>
 
-            <div className="flex justify-center gap-4">
-                <button 
-                    className="rounded-full px-6 py-2 text-white bg-blue-600 hover:bg-blue-500"
+            <ToolActions>
+                <Button 
+                    variant="primary" 
                     onClick={handleGenerate}
                 >
                     Generate UUID
-                </button>
+                </Button>
 
                 {uuid && (
-                    <button 
-                        className="rounded-full bg-neutral-600 px-6 py-2 text-white hover:bg-neutral-700"
+                    <Button 
+                        variant="secondary" 
                         onClick={handleClear}
                     >
                         Clear
-                    </button>
+                    </Button>
                 )}
-            </div>
+            </ToolActions>
         </div>
     );  
 }

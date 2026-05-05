@@ -1,6 +1,9 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
-import CopyButton from "../../components/tool/CopyButton";
+import CopyButton from "../../ui/CopyButton";
+import ToolActions from "../../components/tool/ToolActions";
+import Button from "../../ui/Button";
+import { decode } from "astro:schema";
 
 export default function Base64Converter() {
   const [input, setInput] = useState("");
@@ -76,43 +79,32 @@ export default function Base64Converter() {
         </ToolTextarea>
       </div>
 
-      <div className="flex justify-center gap-4">
-        <button
-          type="button"
-          disabled={!hasInput}
+      <ToolActions>
+        <Button
+          isDisabled={!hasInput}
           onClick={encodeBase64}
-          className={`rounded-full px-8 py-3 font-semibold text-white transition-all active:scale-95 ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
-              : "cursor-not-allowed bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Encode
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          disabled={!hasInput}
+        <Button
+          isDisabled={!hasInput}
           onClick={decodeBase64}
-          className={`rounded-full px-8 py-3 font-semibold text-white transition-all active:scale-95 ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
-              : "cursor-not-allowed bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Decode
-        </button>
+        </Button>
 
         {output && (
-          <button
-            type="button"
+          <Button
             onClick={clear}
-            className="rounded-full bg-neutral-600 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-700 hover:shadow-lg hover:shadow-neutral-500/20 active:scale-95"
+            variant="secondary"
           >
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
     </div>
   );
 }

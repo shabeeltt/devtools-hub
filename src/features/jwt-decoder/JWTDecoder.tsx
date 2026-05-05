@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
-import CopyButton from "../../components/tool/CopyButton";
+import ToolActions from "../../components/tool/ToolActions";
+import CopyButton from "../../ui/CopyButton";
+import Button from "../../ui/Button";
 
 type DecodedJwt = {
   header: unknown;
@@ -139,30 +141,24 @@ export default function JWTDecoder() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center gap-3 sm:flex-row">
-        <button
-          type="button"
-          disabled={!hasInput}
+      <ToolActions>
+        <Button
+          isDisabled={!hasInput}
           onClick={decodeJwt}
-          className={`rounded-full px-8 py-3 font-semibold text-white transition-all active:scale-95 ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
-              : "cursor-not-allowed bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
-          Decode JWT
-        </button>
+          Encode
+        </Button>
 
         {hasOutput && (
-          <button
-            type="button"
+          <Button
             onClick={clear}
-            className="rounded-full bg-neutral-600 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-700 hover:shadow-lg hover:shadow-neutral-500/20 active:scale-95"
+            variant="secondary"
           >
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
 
       {decoded.error && (
         <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm font-medium text-red-400">

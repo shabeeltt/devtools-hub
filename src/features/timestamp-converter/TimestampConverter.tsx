@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
-import CopyButton from "../../components/tool/CopyButton";
+import ToolActions from "../../components/tool/ToolActions";
+import CopyButton from "../../ui/CopyButton";
+import Button from "../../ui/Button";
 
 export default function TimestampConverter() {
   const [input, setInput] = useState("");
@@ -102,48 +104,39 @@ export default function TimestampConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-          <ToolTextarea
-            label="Input"
-            value={input}
-            onChange={setInput}
-            placeholder="Enter timestamp or date (e.g. 1714700000 or 2024-05-03)"
-            rows={6}
-          />
-      </div>
+      <ToolTextarea
+        label="Input"
+        value={input}
+        onChange={setInput}
+        placeholder="Enter timestamp or date (e.g. 1714700000 or 2024-05-03)"
+        rows={6}
+      />
 
-      <div className="flex flex-col justify-center gap-3 sm:flex-row">
-        <button
-          type="button"
-          disabled={!hasInput}
+      <ToolActions className="gap-3">
+        <Button
+          isDisabled={!hasInput}
           onClick={convert}
-          className={`rounded-full px-8 py-3 font-semibold text-white transition-all active:scale-95 ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
-              : "cursor-not-allowed bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Convert
-        </button>
+        </Button>
 
-        <button
-          type="button"
+        <Button
           onClick={setNow}
-          className="rounded-full bg-neutral-700 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-600 active:scale-95"
+          variant="primary"
         >
           Now
-        </button>
+        </Button>
 
-        {hasOutput && (
-          <button
-            type="button"
+        {output && (
+          <Button
             onClick={clear}
-            className="rounded-full bg-neutral-600 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-700 active:scale-95"
+            variant="secondary"
           >
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
 
       {output.error && (
         <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400">
