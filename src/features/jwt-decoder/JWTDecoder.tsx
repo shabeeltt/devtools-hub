@@ -2,6 +2,7 @@ import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
 import ToolActions from "../../components/tool/ToolActions";
 import CopyButton from "../../ui/CopyButton";
+import SampleButton from "../../ui/SampleButton";
 import Button from "../../ui/Button";
 
 type DecodedJwt = {
@@ -130,12 +131,7 @@ export default function JWTDecoder() {
             placeholder="Paste your JWT here"
             rows={6}
             rightLabel={
-              <button
-                onClick={loadSample}
-                className="text-xs text-blue-500 hover:text-blue-400"
-              >
-                Sample
-              </button>
+              <SampleButton onClick={loadSample} />
             }
           />
         </div>

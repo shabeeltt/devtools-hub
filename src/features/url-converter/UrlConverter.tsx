@@ -2,6 +2,7 @@ import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
 import CopyButton from "../../ui/CopyButton";
 import ToolActions from "../../components/tool/ToolActions";
+import SampleButton from "../../ui/SampleButton";
 import Button from "../../ui/Button";
 
 export default function UrlConverter() {
@@ -97,12 +98,7 @@ export default function UrlConverter() {
           placeholder="Enter text or encoded URL"
           rows={15}
           rightLabel={
-            <button
-              onClick={loadSample}
-              className="text-xs text-blue-500 hover:text-blue-400"
-            >
-              Sample
-            </button>
+            <SampleButton onClick={loadSample} />
           }
         />
 

@@ -3,12 +3,12 @@ import ToolTextarea from "../../components/tool/ToolTextarea";
 import CopyButton from "../../ui/CopyButton";
 import ToolActions from "../../components/tool/ToolActions";
 import Button from "../../ui/Button";
+import SampleButton from "../../ui/SampleButton";
 import { decode } from "astro:schema";
 
 export default function Base64Converter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [copied, setCopied] = useState(false);
 
   const hasInput = input.trim().length > 0;
   const canUseOutput = output && output !== "invalid base64";
@@ -53,12 +53,7 @@ export default function Base64Converter() {
           placeholder="Enter text or Base64 here"
           rows={15}
           rightLabel={
-            <button
-              onClick={loadSample}
-              className="text-xs text-blue-500 hover:text-blue-400"
-            >
-              Sample
-            </button>
+            <SampleButton onClick={loadSample} />
           }
         />
 

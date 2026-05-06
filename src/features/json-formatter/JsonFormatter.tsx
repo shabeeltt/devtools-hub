@@ -2,6 +2,7 @@ import { useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
 import ToolActions from "../../components/tool/ToolActions";
 import CopyButton from "../../ui/CopyButton";
+import SampleButton from "../../ui/SampleButton";
 import Button from "../../ui/Button";
 
 export default function JsonFormatter() {
@@ -69,12 +70,7 @@ export default function JsonFormatter() {
           placeholder="Paste your JSON here (e.g. {'name': 'DevToolsHub'})"
           rows={15}
           rightLabel={
-            <button
-              onClick={loadSample}
-              className="text-xs text-blue-500 hover:text-blue-400"
-            >
-              Sample
-            </button>
+            <SampleButton onClick={loadSample} />
           }
         />
 
