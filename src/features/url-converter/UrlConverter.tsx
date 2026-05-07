@@ -1,9 +1,13 @@
 import { useState } from "react";
+import ToolTextarea from "../../components/tool/ToolTextarea";
+import CopyButton from "../../ui/CopyButton";
+import ToolActions from "../../components/tool/ToolActions";
+import SampleButton from "../../ui/SampleButton";
+import Button from "../../ui/Button";
 
 export default function UrlConverter() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [copied, setCopied] = useState(false);
   const [encodeFullUrl, setEncodeFullUrl] = useState(true);
 
   const hasInput = input.trim().length > 0;
@@ -26,7 +30,6 @@ export default function UrlConverter() {
         : encodeQueryValues(input);
 
       setOutput(result);
-      setCopied(false);
     } catch {
       setOutput("invalid input");
     }
@@ -35,7 +38,6 @@ export default function UrlConverter() {
   function decode() {
     try {
       setOutput(decodeURIComponent(input));
-      setCopied(false);
     } catch {
       setOutput("invalid input");
     }
@@ -51,22 +53,11 @@ export default function UrlConverter() {
       : encodeQueryValues(text);
 
     setOutput(result);
-    setCopied(false);
-  }
-
-  function copy() {
-    if (!canUseOutput) return;
-
-    navigator.clipboard.writeText(output);
-    setCopied(true);
-
-    setTimeout(() => setCopied(false), 2000);
   }
 
   function clear() {
     setInput("");
     setOutput("");
-    setCopied(false);
   }
 
   return (
@@ -98,89 +89,62 @@ export default function UrlConverter() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <label className="text-sm text-neutral-400">Input</label>
 
-            <button
-              type="button"
-              onClick={loadSample}
-              className="text-xs text-blue-500 hover:text-blue-400"
-            >
-              Sample
-            </button>
-          </div>
+        {/*Input */}
+        <ToolTextarea
+          label="Input"
+          value={input}
+          onChange={setInput}
+          placeholder="Enter text or encoded URL"
+          rows={15}
+          rightLabel={
+            <SampleButton onClick={loadSample} />
+          }
+        />
 
-          <textarea
-            rows={15}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter text or encoded URL"
-            className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none focus:border-blue-500/50"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm text-neutral-400">Output</label>
-
-          <div className="relative">
-            <textarea
-              readOnly
-              rows={15}
+        {/*Output */}
+        <ToolTextarea
+          label="Output"
+          value={output}
+          readOnly
+          rows={15}
+          textColor="accent"
+        >
+          {canUseOutput && (
+            <CopyButton
               value={output}
-              className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400"
+              className="absolute right-4 top-4"
             />
-
-            {canUseOutput && (
-              <button
-                type="button"
-                onClick={copy}
-                className="absolute right-4 top-4 rounded bg-neutral-800 px-3 py-1 text-xs text-white hover:bg-neutral-700"
-              >
-                {copied ? "Copied" : "Copy"}
-              </button>
-            )}
-          </div>
-        </div>
+          )}
+        </ToolTextarea>
       </div>
 
-      <div className="flex justify-center gap-4">
-        <button
-          type="button"
-          disabled={!hasInput}
+      <ToolActions>
+        <Button
+          isDisabled={!hasInput}
           onClick={encode}
-          className={`rounded-full px-6 py-2 text-white ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500"
-              : "bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Encode
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          disabled={!hasInput}
+        <Button
+          isDisabled={!hasInput}
           onClick={decode}
-          className={`rounded-full px-6 py-2 text-white ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500"
-              : "bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Decode
-        </button>
+        </Button>
 
         {output && (
-          <button
-            type="button"
+          <Button
             onClick={clear}
-            className="rounded-full bg-neutral-600 px-6 py-2 text-white hover:bg-neutral-700"
+            variant="secondary"
           >
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
     </div>
   );
 }

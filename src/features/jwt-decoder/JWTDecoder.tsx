@@ -1,4 +1,9 @@
 import { useState } from "react";
+import ToolTextarea from "../../components/tool/ToolTextarea";
+import ToolActions from "../../components/tool/ToolActions";
+import CopyButton from "../../ui/CopyButton";
+import SampleButton from "../../ui/SampleButton";
+import Button from "../../ui/Button";
 
 type DecodedJwt = {
   header: unknown;
@@ -15,7 +20,6 @@ export default function JWTDecoder() {
     signature: "",
     error: null,
   });
-  const [copiedSection, setCopiedSection] = useState<string | null>(null);
 
   const hasInput = input.trim().length > 0;
   const hasOutput =
@@ -98,17 +102,13 @@ export default function JWTDecoder() {
     }
   }
 
-  function copyToClipboard(value: unknown, section: string) {
-    const text =
-      typeof value === "string" ? value : JSON.stringify(value, null, 2);
-
-    navigator.clipboard.writeText(text);
-    setCopiedSection(section);
-
-    setTimeout(() => {
-      setCopiedSection(null);
-    }, 2000);
-  }
+  function formatJson(value: unknown): string {
+    try {
+      return JSON.stringify(value, null, 2);
+    } catch (error) {
+      return "";
+    }
+  };
 
   function clear() {
     setInput("");
@@ -118,59 +118,37 @@ export default function JWTDecoder() {
       signature: "",
       error: null,
     });
-    setCopiedSection(null);
   }
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-neutral-400">
-            Encoded JWT
-          </label>
+      <ToolTextarea
+        label="Encoded JWT"
+        value={input}
+        onChange={setInput}
+        placeholder="Paste your JWT here"
+        rows={6}
+        rightLabel={<SampleButton onClick={loadSample} />}
+      />
 
-          <button
-            type="button"
-            onClick={loadSample}
-            className="text-xs font-medium text-blue-500 transition-colors hover:text-blue-400"
-          >
-            Sample
-          </button>
-        </div>
-
-        <textarea
-          className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none transition-colors focus:border-blue-500/50"
-          rows={4}
-          placeholder="Paste your JWT here"
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-        />
-      </div>
-
-      <div className="flex flex-col justify-center gap-3 sm:flex-row">
-        <button
-          type="button"
-          disabled={!hasInput}
+      <ToolActions>
+        <Button
+          isDisabled={!hasInput}
           onClick={decodeJwt}
-          className={`rounded-full px-8 py-3 font-semibold text-white transition-all active:scale-95 ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
-              : "cursor-not-allowed bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
-          Decode JWT
-        </button>
+          Decode
+        </Button>
 
         {hasOutput && (
-          <button
-            type="button"
+          <Button
             onClick={clear}
-            className="rounded-full bg-neutral-600 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-700 hover:shadow-lg hover:shadow-neutral-500/20 active:scale-95"
+            variant="secondary"
           >
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
 
       {decoded.error && (
         <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm font-medium text-red-400">
@@ -179,76 +157,54 @@ export default function JWTDecoder() {
       )}
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-neutral-400">
-              Header
-            </label>
-
-            {canUseHeader && (
-              <button
-                type="button"
-                onClick={() => copyToClipboard(decoded.header, "header")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copiedSection === "header" ? "Copied" : "Copy"}
-              </button>
-            )}
-          </div>
-
-          <pre className="custom-scrollbar h-[260px] w-full overflow-auto rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
-            {decoded.header
-              ? JSON.stringify(decoded.header, null, 2)
-              : "Header will appear here"}
-          </pre>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-neutral-400">
-              Payload
-            </label>
-
-            {canUsePayload && (
-              <button
-                type="button"
-                onClick={() => copyToClipboard(decoded.payload, "payload")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copiedSection === "payload" ? "Copied" : "Copy"}
-              </button>
-            )}
-          </div>
-
-          <pre className="custom-scrollbar h-[260px] w-full overflow-auto rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
-            {decoded.payload
-              ? JSON.stringify(decoded.payload, null, 2)
-              : "Payload will appear here"}
-          </pre>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-neutral-400">
-            Signature
-          </label>
-
-          {canUseSignature && (
-            <button
-              type="button"
-              onClick={() => copyToClipboard(decoded.signature, "signature")}
-              className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-            >
-              {copiedSection === "signature" ? "Copied" : "Copy"}
-            </button>
+        {/* header output */}
+        <ToolTextarea
+          label="Header"
+          value={decoded.header ? formatJson(decoded.header) : "Header will appear here"}
+          readOnly
+          rows={10}
+          textColor="accent"
+        >
+          {canUseHeader && (
+            <CopyButton
+              value={formatJson(decoded.header)}
+              className="absolute right-4 top-4"
+            />
           )}
-        </div>
+        </ToolTextarea>
 
-        <pre className="custom-scrollbar min-h-[90px] w-full overflow-auto break-all rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
-          {decoded.signature || "Signature will appear here"}
-        </pre>
+        {/* payload output */}
+        <ToolTextarea
+          label="Payload"
+          value={decoded.payload ? formatJson(decoded.payload) : "Payload will appear here"}
+          readOnly
+          rows={10}
+          textColor="accent"
+        >
+          {canUsePayload && (
+            <CopyButton
+              value={formatJson(decoded.payload)}
+              className="absolute right-4 top-4"
+            />
+          )}
+        </ToolTextarea>
       </div>
+
+      {/* signature output */}
+      <ToolTextarea
+        label="Signature"
+        value={decoded.signature || "Signature will appear here"}
+        readOnly
+        rows={3}
+        textColor="accent"
+      >
+        {canUseSignature && (
+          <CopyButton
+            value={decoded.signature}
+            className="absolute right-4 top-4"
+          />
+        )}
+      </ToolTextarea>
 
       <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-4">
         <p className="text-xs leading-relaxed text-neutral-500">

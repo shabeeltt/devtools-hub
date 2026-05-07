@@ -1,8 +1,11 @@
 import { useState } from "react";
+import ToolTextarea from "../../components/tool/ToolTextarea";
+import ToolActions from "../../components/tool/ToolActions";
+import CopyButton from "../../ui/CopyButton";
+import Button from "../../ui/Button";
 
 export default function TimestampConverter() {
   const [input, setInput] = useState("");
-  const [copied, setCopied] = useState<string | null>(null);
 
   const [output, setOutput] = useState<{
     local: string;
@@ -97,66 +100,43 @@ export default function TimestampConverter() {
       milliseconds: "",
       error: null,
     });
-    setCopied(null);
-  }
-
-  function copy(value: string, key: string) {
-    if (!value) return;
-
-    navigator.clipboard.writeText(value);
-    setCopied(key);
-
-    setTimeout(() => {
-      setCopied(null);
-    }, 2000);
   }
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-neutral-400">Input</label>
+      <ToolTextarea
+        label="Input"
+        value={input}
+        onChange={setInput}
+        placeholder="Enter timestamp or date (e.g. 1714700000 or 2024-05-03)"
+        rows={6}
+      />
 
-        <textarea
-          className="custom-scrollbar w-full rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-white outline-none transition-colors focus:border-blue-500/50"
-          rows={6}
-          placeholder="Enter timestamp or date (e.g. 1714700000 or 2024-05-03)"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-      </div>
-
-      <div className="flex flex-col justify-center gap-3 sm:flex-row">
-        <button
-          type="button"
-          disabled={!hasInput}
+      <ToolActions className="gap-3">
+        <Button
+          isDisabled={!hasInput}
           onClick={convert}
-          className={`rounded-full px-8 py-3 font-semibold text-white transition-all active:scale-95 ${
-            hasInput
-              ? "bg-blue-600 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/20"
-              : "cursor-not-allowed bg-neutral-700 opacity-50"
-          }`}
+          variant="primary"
         >
           Convert
-        </button>
+        </Button>
 
-        <button
-          type="button"
+        <Button
           onClick={setNow}
-          className="rounded-full bg-neutral-700 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-600 active:scale-95"
+          variant="primary"
         >
           Now
-        </button>
+        </Button>
 
-        {hasOutput && (
-          <button
-            type="button"
+        {output && (
+          <Button
             onClick={clear}
-            className="rounded-full bg-neutral-600 px-8 py-3 font-semibold text-white transition-all hover:bg-neutral-700 active:scale-95"
+            variant="secondary"
           >
             Clear
-          </button>
+          </Button>
         )}
-      </div>
+      </ToolActions>
 
       {output.error && (
         <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-400">
@@ -170,13 +150,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">Local Time</p>
             {output.local && (
-              <button
-                type="button"
-                onClick={() => copy(output.local, "local")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "local" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.local} />
             )}
           </div>
           <p className="font-mono text-sm text-white break-all">
@@ -189,13 +163,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">UTC Time</p>
             {output.utc && (
-              <button
-                type="button"
-                onClick={() => copy(output.utc, "utc")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "utc" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.utc} />
             )}
           </div>
           <p className="font-mono text-sm text-white break-all">
@@ -208,13 +176,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">Unix (seconds)</p>
             {output.seconds && (
-              <button
-                type="button"
-                onClick={() => copy(output.seconds, "seconds")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "seconds" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.seconds} />
             )}
           </div>
           <p className="font-mono text-sm text-white">
@@ -227,13 +189,7 @@ export default function TimestampConverter() {
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-neutral-400">Unix (milliseconds)</p>
             {output.milliseconds && (
-              <button
-                type="button"
-                onClick={() => copy(output.milliseconds, "ms")}
-                className="rounded-lg bg-neutral-800 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-neutral-700"
-              >
-                {copied === "ms" ? "Copied" : "Copy"}
-              </button>
+              <CopyButton value={output.milliseconds} />
             )}
           </div>
           <p className="font-mono text-sm text-white">
