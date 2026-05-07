@@ -122,20 +122,14 @@ export default function JWTDecoder() {
 
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <ToolTextarea
-            label="Encoded JWT"
-            value={input}
-            onChange={setInput}
-            placeholder="Paste your JWT here"
-            rows={6}
-            rightLabel={
-              <SampleButton onClick={loadSample} />
-            }
-          />
-        </div>
-      </div>
+      <ToolTextarea
+        label="Encoded JWT"
+        value={input}
+        onChange={setInput}
+        placeholder="Paste your JWT here"
+        rows={6}
+        rightLabel={<SampleButton onClick={loadSample} />}
+      />
 
       <ToolActions>
         <Button
@@ -143,7 +137,7 @@ export default function JWTDecoder() {
           onClick={decodeJwt}
           variant="primary"
         >
-          Encode
+          Decode
         </Button>
 
         {hasOutput && (
@@ -163,58 +157,54 @@ export default function JWTDecoder() {
       )}
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <div className="relative flex items-center justify-between">
-            <label className="text-sm font-medium text-neutral-400">
-              Header
-            </label>
-
-            {canUseHeader && (
-              <CopyButton value={formatJson(decoded.header)} />
-            )}
-          </div>
-
-          <pre className="custom-scrollbar h-[260px] w-full overflow-auto rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
-            {decoded.header
-              ? formatJson(decoded.header)
-              : "Header will appear here"}
-          </pre>
-        </div>
-
-        <div className="space-y-2">
-          <div className="relative flex items-center justify-between">
-            <label className="text-sm font-medium text-neutral-400">
-              Payload
-            </label>
-
-            {canUsePayload && (
-              <CopyButton value={formatJson(decoded.payload)} />
-            )}
-          </div>
-
-          <pre className="custom-scrollbar h-[260px] w-full overflow-auto rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
-            {decoded.payload
-              ? formatJson(decoded.payload)
-              : "Payload will appear here"}
-          </pre>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-neutral-400">
-            Signature
-          </label>
-
-          {canUseSignature && (
-            <CopyButton value={decoded.signature} />
+        {/* header output */}
+        <ToolTextarea
+          label="Header"
+          value={decoded.header ? formatJson(decoded.header) : "Header will appear here"}
+          readOnly
+          rows={10}
+          textColor="accent"
+        >
+          {canUseHeader && (
+            <CopyButton
+              value={formatJson(decoded.header)}
+              className="absolute right-4 top-4"
+            />
           )}
-        </div>
+        </ToolTextarea>
 
-        <pre className="custom-scrollbar min-h-[90px] w-full overflow-auto break-all rounded-xl border border-neutral-800 bg-neutral-900 p-4 font-mono text-sm text-blue-400 outline-none">
-          {decoded.signature || "Signature will appear here"}
-        </pre>
+        {/* payload output */}
+        <ToolTextarea
+          label="Payload"
+          value={decoded.payload ? formatJson(decoded.payload) : "Payload will appear here"}
+          readOnly
+          rows={10}
+          textColor="accent"
+        >
+          {canUsePayload && (
+            <CopyButton
+              value={formatJson(decoded.payload)}
+              className="absolute right-4 top-4"
+            />
+          )}
+        </ToolTextarea>
       </div>
+
+      {/* signature output */}
+      <ToolTextarea
+        label="Signature"
+        value={decoded.signature || "Signature will appear here"}
+        readOnly
+        rows={3}
+        textColor="accent"
+      >
+        {canUseSignature && (
+          <CopyButton
+            value={decoded.signature}
+            className="absolute right-4 top-4"
+          />
+        )}
+      </ToolTextarea>
 
       <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-4">
         <p className="text-xs leading-relaxed text-neutral-500">
