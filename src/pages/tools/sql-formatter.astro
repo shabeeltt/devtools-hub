@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SqlFormatterTool from "../../features/sql-formatter/SqlFormatter";
+---
+
+<BaseLayout 
+  title="SQL Formatter & Beautifier | Free Online Tool"
+  description="Format and beautify SQL queries instantly. Capitalizes keywords, adds proper indentation, and structures your queries for readability. Runs entirely in your browser."
+>
+  <h2 class="mb-6 text-2xl font-semibold">
+    SQL Formatter
+  </h2>
+
+  <SqlFormatterTool client:load />
+</BaseLayout>

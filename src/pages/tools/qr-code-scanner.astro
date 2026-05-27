@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import QrCodeScannerTool from "../../features/qr-code-scanner/QrCodeScanner";
+---
+
+<BaseLayout 
+  title="QR Code Scanner | Free Online Tool"
+  description="Scan QR codes using your camera or by uploading an image. Free, offline-capable, and runs entirely in your browser. No data sent to servers."
+>
+  <h2 class="mb-6 text-2xl font-semibold">
+    QR Code Scanner
+  </h2>
+
+  <QrCodeScannerTool client:load />
+</BaseLayout>
