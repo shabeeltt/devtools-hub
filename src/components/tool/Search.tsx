@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+import Fuse from "fuse.js";
 import { tools, type Tool } from "../../constants/tools";
 
 export default function Search() {
@@ -23,11 +24,18 @@ export default function Search() {
     }
   }, []);
 
+  const fuse = useMemo(
+    () =>
+      new Fuse(tools, {
+        keys: ["name", "description"],
+        threshold: 0.4,
+        includeScore: true,
+      }),
+    []
+  );
+
   const filteredTools = query.trim()
-    ? tools.filter((tool) =>
-        tool.name.toLowerCase().includes(query.toLowerCase()) ||
-        tool.description.toLowerCase().includes(query.toLowerCase())
-      )
+    ? fuse.search(query).map((result) => result.item)
     : [];
 
   const defaultTools = recentSearches.length > 0 
