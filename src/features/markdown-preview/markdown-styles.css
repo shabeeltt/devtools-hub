@@ -1,0 +1,195 @@
+/* ── GitHub-style Markdown theme ────────────────────────────
+   Uses CSS custom properties from global.css for seamless
+   dark/light mode switching. */
+
+.md-preview {
+  color: var(--color-primary);
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+
+/* ── Spacing ───────────────────────────────────────────────── */
+.md-preview > *:first-child {
+  margin-top: 0;
+}
+.md-preview > *:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Headings ──────────────────────────────────────────────── */
+.md-preview h1,
+.md-preview h2,
+.md-preview h3,
+.md-preview h4,
+.md-preview h5,
+.md-preview h6 {
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+.md-preview h1 {
+  font-size: 1.625rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-top: 0;
+}
+.md-preview h2 {
+  font-size: 1.375rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.md-preview h3 {
+  font-size: 1.125rem;
+}
+.md-preview h4 {
+  font-size: 1rem;
+}
+.md-preview h5,
+.md-preview h6 {
+  font-size: 0.875rem;
+}
+
+/* ── Paragraphs & Text ─────────────────────────────────────── */
+.md-preview p {
+  margin: 0.5rem 0;
+}
+.md-preview strong {
+  font-weight: 700;
+}
+.md-preview del {
+  color: var(--color-muted);
+}
+
+/* ── Lists ─────────────────────────────────────────────────── */
+.md-preview ul {
+  list-style-type: disc;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+.md-preview ol {
+  list-style-type: decimal;
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+.md-preview li {
+  margin: 0.2rem 0;
+}
+.md-preview li > ul {
+  list-style-type: circle;
+}
+.md-preview li > ul > li > ul {
+  list-style-type: square;
+}
+.md-preview li > ul,
+.md-preview li > ol {
+  margin: 0;
+}
+
+/* ── Inline code ───────────────────────────────────────────── */
+.md-preview :not(pre) > code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  color: var(--color-accent);
+}
+
+/* ── Code blocks ───────────────────────────────────────────── */
+.md-preview pre {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.75rem 0;
+  overflow-x: auto;
+  background: var(--color-elevated);
+}
+
+.md-preview pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  background: none !important;
+  padding: 0 !important;
+  border: none !important;
+  color: var(--color-primary);
+}
+
+/* Language badge — extracted from the lang class */
+.md-preview pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  background: var(--color-surface);
+  padding: 0.2rem 0.6rem;
+  border-radius: 0 8px 0 6px;
+  border-left: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+/* ── Blockquotes ───────────────────────────────────────────── */
+.md-preview blockquote {
+  margin: 0.75rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-accent-bg);
+  border-radius: 0 8px 8px 0;
+  color: var(--color-secondary);
+}
+.md-preview blockquote p {
+  margin: 0.25rem 0;
+}
+
+/* ── Tables ────────────────────────────────────────────────── */
+.md-preview table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.875rem;
+}
+.md-preview th,
+.md-preview td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.md-preview th {
+  background: var(--color-elevated);
+  font-weight: 600;
+}
+.md-preview tr:nth-child(even) {
+  background: var(--color-elevated);
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+.md-preview a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.md-preview a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+/* ── Horizontal rule ───────────────────────────────────────── */
+.md-preview hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 1.5rem 0;
+}
+
+/* ── Images ────────────────────────────────────────────────── */
+.md-preview img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 0.75rem 0;
+}

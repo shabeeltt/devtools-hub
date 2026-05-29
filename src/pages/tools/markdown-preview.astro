@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarkdownPreview from "../../features/markdown-preview/MarkdownPreview";
+---
+
+<BaseLayout
+  title="Markdown Preview"
+  description="Live preview your Markdown as HTML. A fast, client-side Markdown editor with real-time rendering and sanitized output."
+>
+  <h2 class="mb-6 text-2xl font-semibold">Markdown Preview</h2>
+  <MarkdownPreview client:load />
+</BaseLayout>
