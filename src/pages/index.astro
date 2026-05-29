@@ -1,8 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { tools } from "../constants/tools";
-import ToolCard from "../components/tool/ToolCard.tsx";
-import FavoriteTools from "../components/FavoriteTools.tsx";
+import ToolManager from "../components/ToolManager.tsx";
 ---
 
 <BaseLayout 
@@ -10,19 +9,6 @@ import FavoriteTools from "../components/FavoriteTools.tsx";
   description="Your ultimate online developer utility belt. Instantly format JSON, decode Base64, generate UUIDs, and more in a fast, free, offline-ready web app."
 >
 
-  <FavoriteTools class="mb-12" client:load></FavoriteTools>
-
-  <div class="mb-12">
-    <h2 class="text-3xl font-bold text-primary tracking-tight mb-2">
-      Available Tools
-    </h2>
-    <p class="text-secondary">
-      Essential utilities to boost your productivity.
-    </p>
-  </div>
-
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {tools.map(tool => <ToolCard key={tool.name} tool={tool} client:load></ToolCard>)}
-  </div>
+  <ToolManager tools={tools} client:load></ToolManager>
   
 </BaseLayout>
