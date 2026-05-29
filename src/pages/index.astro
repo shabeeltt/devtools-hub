@@ -1,12 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { tools } from "../constants/tools";
+import ToolCard from "../components/tool/ToolCard.tsx";
+import FavoriteTools from "../components/FavoriteTools.tsx";
 ---
 
 <BaseLayout 
   title="DevTools Hub | Essential Free Developer Tools & Utilities"
   description="Your ultimate online developer utility belt. Instantly format JSON, decode Base64, generate UUIDs, and more in a fast, free, offline-ready web app."
 >
+
+  <FavoriteTools class="mb-12" client:load></FavoriteTools>
+
   <div class="mb-12">
     <h2 class="text-3xl font-bold text-primary tracking-tight mb-2">
       Available Tools
@@ -17,22 +22,7 @@ import { tools } from "../constants/tools";
   </div>
 
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {
-      tools.map((tool) => (
-        <a
-          href={tool.href}
-          class="group relative overflow-hidden rounded-xl border border-border bg-surface p-6 transition-all hover:border-accent/50 hover:bg-elevated"
-        >
-          <div
-            class="mb-4 inline-flex size-10 items-center justify-center rounded-lg bg-accent-bg text-accent group-hover:bg-accent group-hover:text-white transition-colors"
-            set:html={tool.icon}
-          />
-
-          <h3 class="text-lg font-semibold text-primary mb-2">{tool.name}</h3>
-
-          <p class="text-sm text-secondary">{tool.description}</p>
-        </a>
-      ))
-    }
+    {tools.map(tool => <ToolCard key={tool.name} tool={tool} client:load></ToolCard>)}
   </div>
+  
 </BaseLayout>
