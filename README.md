@@ -1,51 +1,88 @@
 # 🛠️ DevToolsHub
 
-Welcome to **DevToolsHub**! This is a collection of fast, secure, and easy-to-use tools for developers. Built with **Astro**, **React**, and **Tailwind CSS**.
+DevToolsHub is a collection of 20+ developer tools built with Astro, React, and Tailwind CSS.
 
-Our goal is to make common developer tasks simpler while keeping your data safe. Everything runs directly in your browser. **Your data never leaves your computer.**
+It provides simple utilities for formatting, converting, generating, testing, and working with common developer data directly in the browser.
+
+**Live Demo:** https://devtools-hub-beryl.vercel.app/
 
 ![DevToolsHub Homepage](./public/assets/images/homepage.png)
-*DevToolsHub Home - A fast, local developer toolbox with a gorgeous dark mode interface.*
+
+_DevToolsHub Home - A collection of developer tools with a clean and responsive interface._
 
 ---
 
-## ✨ Features
+## ✨ Included Tools
 
-- **JSON Formatter**: Prettify and validate JSON with ease.
-- **JWT Decoder**: Decode and inspect JSON Web Tokens locally.
-- **Base64 Converter**: Encode and decode text to Base64 format.
-- **URL Converter**: Safely encode or decode URL components.
-- **Diff Checker**: Compare text, code, JSON, or config side by side.
-- **Timestamp Converter**: Convert between Unix timestamps and readable dates.
-- **UUID Generator**: Create secure, random UUIDs (v4).
-- **Beautiful Dark Mode**: A sleek design that is easy on the eyes.
+DevToolsHub currently includes tools such as:
+
+- JSON Formatter
+- Base64 Encoder & Decoder
+- URL Encoder & Decoder
+- Diff Checker
+- UUID Generator
+- JWT Decoder
+- Unix Timestamp Converter
+- Hash Generator
+- Regex Sandbox
+- API Tester
+- JSON Model Generator
+- Cron Expression Generator
+- QR Code Generator
+- Text Case Modifier
+- Text ↔ Binary Converter
+- Lorem Ipsum Generator
+- Color Converter
+- Gitignore Generator
+- Markdown Preview
+- Curl to Fetch
+
+New tools are added regularly through community contributions.
 
 ---
 
 ## 📸 App Screenshots
 
-Here is a look at some of the most popular tools available in DevToolsHub:
+Here is a look at some of the tools available in DevToolsHub.
 
 ### 📝 JSON Formatter
+
 ![JSON Formatter](./public/assets/images/json-formatter.png)
-*Format, validate, and beautify raw JSON instantly with syntax highlighting.*
+
+_Format, validate, and beautify raw JSON instantly._
 
 ### 🔍 Diff Checker
+
 ![Diff Checker](./public/assets/images/diff-checker.png)
-*Compare text, code, or JSON side-by-side with clear visual indicators for differences.*
+
+_Compare text, code, JSON, or configuration files side by side._
 
 ### 🆔 UUID Generator
+
 ![UUID Generator](./public/assets/images/uuid-generator.png)
-*Generate cryptographically secure v4 UUIDs in bulk with one click.*
+
+_Generate secure UUID v4 values with a single click._
 
 ---
 
-## 🔒 Privacy & Security
+## 🔒 Privacy
 
-Most online tools send your data to a server for processing. DevToolsHub works differently:
-- **Local Only**: All processing happens entirely in your browser using JavaScript.
-- **No Tracking**: We do not track your inputs or your usage.
-- **Open Source**: The code is public so you can see exactly how your data is handled.
+DevToolsHub is designed to run directly in the browser.
+
+- Most tools work entirely client-side.
+- No account is required.
+- The project is open source.
+- You can inspect the source code and see how every tool works.
+
+---
+
+## 🧰 Tech Stack
+
+- Astro
+- React
+- TypeScript
+- Tailwind CSS
+- pnpm
 
 ---
 
@@ -53,52 +90,62 @@ Most online tools send your data to a server for processing. DevToolsHub works d
 
 ```text
 src/
-  ├── components/tool/  shared tool wrappers (e.g. ToolTextarea, ToolActions)
-  ├── features/         core logic for each tool (one folder per tool)
-  ├── ui/               reusable basic components (Button, CopyButton, etc.)
-  ├── layouts/          page templates
-  ├── pages/            the main routes and tool pages
-  └── styles/           global styles and custom scrollbars
+  ├── components/tool/  shared tool wrappers
+  ├── features/         tool logic and UI
+  ├── ui/               reusable UI components
+  ├── layouts/          page layouts
+  ├── pages/            routes and tool pages
+  └── styles/           global styles
 ```
 
 ---
 
 ## 🚀 Getting Started
 
-To run the project on your own machine:
+Install dependencies:
 
-1. **Install dependencies**:
-   ```bash
-   pnpm install
-   ```
+```bash
+pnpm install
+```
 
-2. **Run the project**:
-   ```bash
-   pnpm dev
-   ```
+Run the development server:
+
+```bash
+pnpm dev
+```
 
 ---
 
 ## ➕ Adding a New Tool
 
-We love new tools! If you want to add one, here is the simplest way:
+Want to contribute a new tool?
 
-1. **Create the Feature**: Add a folder in `src/features/` with your React code.
-2. **Use Shared UI**: Use components from `src/ui/` and `src/components/tool/` to keep things looking consistent.
-3. **Create the Page**: Add a new `.astro` file in `src/pages/tools/` to host your feature.
-4. **Link it**: Add your new tool to the list in `src/pages/index.astro`.
+1. Create a new feature inside `src/features/`.
+2. Reuse components from `src/ui/` and `src/components/tool/`.
+3. Create a page inside `src/pages/tools/`.
+4. Add the tool entry to `src/constants/tools.ts`.
+
+Try to keep tools simple, fast, and browser-based whenever possible.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions of all kinds! Whether it's a bug fix, a new tool, or improving documentation, we would love to have your help. 
+Contributions of all sizes are welcome.
 
-* **Good First Issues**: Documentation tasks, screenshot updates, and minor text/styling fixes are perfect first issues for new contributors.
-* **Get Started**: Please see [CONTRIBUTING.md](./CONTRIBUTING.md) to get started with setting up the project and opening a pull request.
+You can help by:
+
+- Adding new tools
+- Fixing bugs
+- Improving UI and UX
+- Improving documentation
+- Updating screenshots
+- Reviewing pull requests
+
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a pull request.
 
 ---
 
 ## 📄 License
 
-This project is open-source and available under the [MIT License](./LICENSE).
+This project is open source and available under the [MIT License](./LICENSE).
