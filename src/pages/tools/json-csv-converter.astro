@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JsonCsvConverter from "../../features/json-csv-converter/JsonCsvConverter";
+---
+
+<BaseLayout
+  title="JSON ↔ CSV Converter | Free Online Developer Tool"
+  description="Convert JSON arrays to CSV and CSV data back into JSON instantly. Fast, secure, and runs entirely in your browser."
+>
+  <h2 class="mb-6 text-2xl font-semibold">
+    JSON ↔ CSV Converter
+  </h2>
+
+  <JsonCsvConverter client:load />
+</BaseLayout>
