@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
 import ToolActions from "../../components/tool/ToolActions";
 import Button from "../../ui/Button";
@@ -74,6 +74,11 @@ export default function JsonCsvConverter() {
     setError("");
   }
 
+  useEffect(() => {
+    setOutput("");
+    setError("");
+  }, [direction]);
+
   return (
     <div className="w-full space-y-4">
       {/* Direction Switcher */}
@@ -114,18 +119,20 @@ export default function JsonCsvConverter() {
           label="Output"
           value={output}
           readOnly
-          onChange={() => {}}
           placeholder="Converted output will appear here..."
+          rightLabel={canUseOutput ? <CopyButton value={output} /> : undefined}
         />
       </div>
 
       {/* Actions */}
       <ToolActions>
-        <Button onClick={handleConvert} isDisabled={!hasInput}>
+        <Button
+          variant="primary"
+          onClick={handleConvert}
+          isDisabled={!hasInput}
+        >
           Convert
         </Button>
-
-        {canUseOutput && <CopyButton value={output} />}
 
         {(input || output || error) && (
           <Button onClick={handleClear} variant="secondary">
