@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import YamlJsonConverter from "../../features/yaml-json-converter/YamlJsonConverter";
+---
+
+<BaseLayout
+  title="YAML ↔ JSON Converter | Free Developer Tool"
+  description="Convert YAML to JSON and JSON to YAML instantly. Free browser-based developer tool."
+>
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-white tracking-tight mb-2">
+      YAML ↔ JSON Converter
+    </h2>
+
+    <p class="text-neutral-400">
+      Convert YAML to JSON and JSON to YAML instantly with live conversion.
+    </p>
+  </div>
+
+  <YamlJsonConverter client:load />
+</BaseLayout>
