@@ -137,4 +137,11 @@ export const tools: Tool[] = [
     href: "/tools/curl-to-fetch",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8"/><path d="M8 15h8"/><path d="M11 4 7 20"/><path d="M17 4l-4 16"/></svg>`,
   },
+  {
+    name: "JSON ↔ CSV Converter",
+    description:
+      "Convert JSON arrays to CSV and CSV data back into JSON instantly.",
+    href: "/tools/json-csv-converter",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m10 10 4 4"/><path d="m14 10-4 4"/></svg>`,
+  },
 ];

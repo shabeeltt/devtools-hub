@@ -23,6 +23,7 @@
     "highlight.js": "^11.11.1",
     "marked": "^18.0.4",
     "marked-highlight": "^2.2.4",
+    "papaparse": "^5.5.3",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
@@ -32,6 +33,7 @@
     "vite": "^7"
   },
   "devDependencies": {
-    "@types/dompurify": "^3.2.0"
+    "@types/dompurify": "^3.2.0",
+    "@types/papaparse": "^5.5.2"
   }
 }
