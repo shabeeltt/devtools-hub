@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CurlToFetch from "../../features/curl-to-fetch/CurlToFetch";
+---
+
+<BaseLayout
+  title="CURL to Fetch Converter | Free Developer Tool"
+  description="Convert curl commands into JavaScript fetch requests instantly. Fast, browser-based developer utility."
+>
+  <h2 class="mb-6 text-2xl font-semibold">
+    CURL to Fetch Converter
+  </h2>
+
+  <CurlToFetch client:load />
+</BaseLayout>
