@@ -1,0 +1,118 @@
+name: Auto Assign Issues
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+
+jobs:
+  assign:
+    if: github.event.issue.pull_request == null
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Auto assign issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const comment = context.payload.comment;
+            const username = comment.user.login;
+            const body = comment.body.toLowerCase().trim();
+
+            const maintainerAssociations = ["OWNER", "MEMBER", "COLLABORATOR"];
+            const allowedLabels = ["good first issue", "beginner", "feature", "help wanted"];
+
+            if (issue.state !== "open") {
+              return;
+            }
+
+            if (comment.user.type === "Bot") {
+              return;
+            }
+
+            if (maintainerAssociations.includes(comment.author_association)) {
+              return;
+            }
+
+            const issueLabels = issue.labels.map((label) =>
+              (typeof label === "string" ? label : label.name).toLowerCase()
+            );
+
+            const canAutoAssign = issueLabels.some((label) =>
+              allowedLabels.includes(label)
+            );
+
+            if (!canAutoAssign) {
+              return;
+            }
+
+            const negativePatterns = [
+              /\bdo\s+not\s+assign\s+me\b/,
+              /\bdon't\s+assign\s+me\b/,
+              /\bnot\s+assign\s+me\b/,
+              /\bnot\s+working\s+on\s+this\b/,
+              /\bdon't\s+want\s+to\s+work\s+on\s+this\b/,
+              /\bdo\s+not\s+want\s+to\s+work\s+on\s+this\b/,
+              /\bcan't\s+work\s+on\s+this\b/,
+              /\bcannot\s+work\s+on\s+this\b/,
+              /\bnot\s+interested\b/
+            ];
+
+            const assignmentPatterns = [
+              /\bassign\s+me\b/,
+              /\bplease\s+assign(?:\s+me)?\b/,
+              /\bkindly\s+assign(?:\s+me)?\b/,
+              /\bcan\s+i\s+(?:take|pick|work\s+on)\s+this\b/,
+              /\bcould\s+i\s+(?:take|pick|work\s+on)\s+this\b/,
+              /\bmay\s+i\s+(?:take|pick|work\s+on)\s+this\b/,
+              /\bi\s+(?:want|would\s+like|wanna)\s+to\s+work\s+on\s+this\b/,
+              /\bi(?:'|’)d\s+like\s+to\s+work\s+on\s+this\b/,
+              /\bi\s+can\s+work\s+on\s+this\b/,
+              /\bi\s+will\s+work\s+on\s+this\b/,
+              /\bi(?:'|’)ll\s+work\s+on\s+this\b/,
+              /\blet\s+me\s+work\s+on\s+this\b/,
+              /\bcan\s+you\s+assign\s+(?:this\s+)?(?:issue\s+)?to\s+me\b/,
+              /\bcan\s+you\s+assign\s+me\b/,
+              /\binterested\s+in\s+working\s+on\s+this\b/
+            ];
+
+            const isNegative = negativePatterns.some((pattern) => pattern.test(body));
+            const wantsAssignment = assignmentPatterns.some((pattern) => pattern.test(body));
+
+            if (isNegative || !wantsAssignment) {
+              return;
+            }
+
+            const assignees = issue.assignees.map((assignee) => assignee.login);
+
+            if (assignees.includes(username)) {
+              return;
+            }
+
+            if (assignees.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Thanks @${username}, but this issue is already assigned. Please pick another open issue, or feel free to open a new issue for a tool you'd like to build.`
+              });
+
+              return;
+            }
+
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              assignees: [username]
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: `Assigned to @${username}. Please open a PR or share an update within 10 days. If there is no activity, the issue may be unassigned so others can work on it.`
+            });
