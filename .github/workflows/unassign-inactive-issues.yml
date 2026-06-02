@@ -1,0 +1,106 @@
+name: Unassign Inactive Issues
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  metadata: read
+
+jobs:
+  unassign:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Unassign inactive issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const inactiveDays = 10;
+            const allowedLabels = ["good first issue", "beginner", "feature", "help wanted"];
+
+            const now = new Date();
+            const cutoff = new Date(now);
+            cutoff.setDate(cutoff.getDate() - inactiveDays);
+
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: "open",
+                per_page: 100
+              }
+            );
+
+            for (const issue of issues) {
+              if (issue.pull_request) {
+                continue;
+              }
+
+              if (!issue.assignees || issue.assignees.length === 0) {
+                continue;
+              }
+
+              const issueLabels = issue.labels.map((label) =>
+                typeof label === "string" ? label : label.name
+              );
+
+              const canAutoUnassign = issueLabels.some((label) =>
+                allowedLabels.includes(label)
+              );
+
+              if (!canAutoUnassign) {
+                continue;
+              }
+
+              const assignees = issue.assignees.map(
+                (assignee) => assignee.login
+              );
+
+              const assigneesToRemove = [];
+
+              for (const assignee of assignees) {
+                const collaborator = await github.rest.repos.getCollaboratorPermissionLevel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  username: assignee
+                });
+
+                const permission = collaborator.data.permission;
+
+                if (["admin", "maintain", "write"].includes(permission)) {
+                  continue;
+                }
+
+                assigneesToRemove.push(assignee);
+              }
+
+              if (assigneesToRemove.length === 0) {
+                continue;
+              }
+
+              const updatedAt = new Date(issue.updated_at);
+
+              if (updatedAt > cutoff) {
+                continue;
+              }
+
+              await github.rest.issues.removeAssignees({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                assignees: assigneesToRemove
+              });
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `@${assigneesToRemove.join(
+                  ", @"
+                )}, you have been unassigned from this issue due to no activity for ${inactiveDays} days. This issue is now available for others to work on. Feel free to ask again if you would still like to work on it.`
+              });
+            }
