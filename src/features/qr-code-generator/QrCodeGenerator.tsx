@@ -9,6 +9,7 @@ export default function QrCodeGenerator() {
   const [tab, setTab] = useState<"generate" | "scan">("generate");
   const [text, setText] = useState("");
   const [scanResult, setScanResult] = useState("");
+  const [scanError, setScanError] = useState("");
 
   const svgRef = useRef<HTMLDivElement>(null);
   const scannerRef = useRef<Html5Qrcode | null>(null);
@@ -44,13 +45,15 @@ export default function QrCodeGenerator() {
         { facingMode: "environment" },
         { fps: 10, qrbox: 250 },
         (decodedText) => {
-          setScanResult(decodedText);
-        },
+  setScanResult(decodedText);
+  setScanError("");
+},
         () => {}
       );
-    } catch (error) {
-      console.error(error);
-    }
+    }catch (error) {
+  console.error(error);
+  setScanError("Unable to start camera scanner.");
+}
   };
 
   const stopScanner = async () => {
@@ -73,26 +76,26 @@ export default function QrCodeGenerator() {
     const scanner = new Html5Qrcode("qr-reader-image");
 
     try {
-      const result = await scanner.scanFile(file, true);
-      setScanResult(result);
-    } catch {
-      setScanResult("Unable to read QR code.");
-    }
+  const result = await scanner.scanFile(file, true);
+  setScanResult(result);
+  setScanError("");
+} catch {
+  setScanResult("");
+  setScanError("Unable to read QR code.");
+}
 
     await scanner.clear();
   };
 
   useEffect(() => {
-    if (tab === "scan") {
-      startScanner();
-    } else {
-      stopScanner();
-    }
+  if (tab !== "scan") {
+    stopScanner();
+  }
 
-    return () => {
-      stopScanner();
-    };
-  }, [tab]);
+  return () => {
+    stopScanner();
+  };
+}, [tab]);
 
   return (
     <div className="space-y-4">
@@ -148,6 +151,12 @@ export default function QrCodeGenerator() {
 
       {tab === "scan" && (
         <>
+<Button
+  variant="primary"
+  onClick={startScanner}
+>
+  Start Scanner
+</Button>
           <div
             id="qr-reader"
             className="rounded-xl border border-border bg-surface p-2"
@@ -160,6 +169,11 @@ export default function QrCodeGenerator() {
           />
 
           <div id="qr-reader-image" />
+{scanError && (
+  <div className="rounded-xl border border-border bg-surface p-4">
+    {scanError}
+  </div>
+)}
 
           {scanResult && (
             <div className="rounded-xl border border-border bg-surface p-4">
