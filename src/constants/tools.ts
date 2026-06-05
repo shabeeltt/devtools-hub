@@ -151,6 +151,12 @@ export const tools: Tool[] = [
   icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 4-4 16"/></svg>`,
 },
 {
+  name: "CSS Unit Converter",
+  description: "Convert between px, em, rem, %, vw and vh units.",
+  href: "/tools/css-unit-converter",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>`,
+},
+  {
     name: "CSS Gradient Generator",
     description:
       "Generate CSS gradients visually with live preview and exportable CSS code.",
