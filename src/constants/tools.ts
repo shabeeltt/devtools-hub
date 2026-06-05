@@ -145,6 +145,12 @@ export const tools: Tool[] = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m10 10 4 4"/><path d="m14 10-4 4"/></svg>`,
   },
   {
+  name: "XML Formatter",
+  description: "Format and validate XML with clean readable output.",
+  href: "/tools/xml-formatter",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 4-4 16"/></svg>`,
+},
+{
   name: "CSS Unit Converter",
   description: "Convert between px, em, rem, %, vw and vh units.",
   href: "/tools/css-unit-converter",
