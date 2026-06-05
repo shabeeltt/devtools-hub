@@ -59,16 +59,15 @@ export default function SqlFormatter() {
         />
 
         <ToolTextarea
-          label="Output"
-          value={output}
-          readOnly
-          rows={15}
-          textColor="accent"
-        >
-          {canUseOutput && (
-            <CopyButton value={output} className="absolute right-4 top-4" />
-          )}
-        </ToolTextarea>
+  label="Output"
+  value={output}
+  readOnly
+  rows={15}
+  textColor="accent"
+  rightLabel={
+    canUseOutput ? <CopyButton value={output} /> : undefined
+  }
+/>
       </div>
 
       <div className="md:hidden sticky bottom-4 z-10 bg-surface/95 backdrop-blur-sm border border-border rounded-xl p-3 shadow-lg">
