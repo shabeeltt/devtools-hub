@@ -82,19 +82,18 @@ export default function XmlFormatter() {
         />
 
         <ToolTextarea
-          label="Output"
-          value={output}
-          readOnly
-          rows={15}
-          textColor="accent"
-        >
-          {canUseOutput && (
-            <CopyButton value={output} className="absolute right-4 top-4" />
-          )}
-        </ToolTextarea>
+  label="Output"
+  value={output}
+  readOnly
+  rows={15}
+  textColor="accent"
+  rightLabel={
+    canUseOutput ? <CopyButton value={output} /> : undefined
+  }
+/>
       </div>
 
-      <div className="hidden md:block">
+      <div>
         <ToolActions>
           <Button
             variant="primary"
