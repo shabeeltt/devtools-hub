@@ -145,13 +145,19 @@ export const tools: Tool[] = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m10 10 4 4"/><path d="m14 10-4 4"/></svg>`,
   },
   {
+  name: "HTML Live Preview",
+  description: "Preview HTML instantly with safe browser-side rendering.",
+  href: "/tools/html-live-preview",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="M14 4h6"/><path d="M14 20h6"/></svg>`,
+},
+{
   name: "SQL Formatter",
   description:
     "Beautify your raw SQL queries with clean spacing and line breaks automatically.",
   href: "/tools/sql-formatter",
   icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/></svg>`,
 },
-  {
+{
   name: "XML Formatter",
   description: "Format and validate XML with clean readable output.",
   href: "/tools/xml-formatter",
@@ -163,11 +169,11 @@ export const tools: Tool[] = [
   href: "/tools/css-unit-converter",
   icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>`,
 },
-  {
-    name: "CSS Gradient Generator",
-    description:
-      "Generate CSS gradients visually with live preview and exportable CSS code.",
-    href: "/tools/css-gradient-generator",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
-  },
+{
+  name: "CSS Gradient Generator",
+  description:
+    "Generate CSS gradients visually with live preview and exportable CSS code.",
+  href: "/tools/css-gradient-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
+},
 ];
