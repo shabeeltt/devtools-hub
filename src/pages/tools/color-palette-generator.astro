@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ColorPaletteGenerator from "../../features/color-palette-generator/ColorPaletteGenerator";
+---
+
+<BaseLayout
+  title="Color Palette & Gradient Generator | Free Online Developer Tool"
+  description="Create linear and radial gradients with multiple color stops, preview them live, and copy CSS output."
+>
+  <h2 class="mb-6 text-2xl font-semibold">Color Palette & Gradient Generator</h2>
+
+  <ColorPaletteGenerator client:load />
+</BaseLayout>
