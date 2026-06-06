@@ -1,3 +1,5 @@
 allowBuilds:
   esbuild: true
   sharp: true
+  tree-sitter: set this to true or false
+  tree-sitter-bash: set this to true or false
