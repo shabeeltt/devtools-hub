@@ -162,4 +162,10 @@ export const tools: Tool[] = [
     href: "/tools/password-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M5 8h14"/><path d="M5 16h14"/><circle cx="12" cy="12" r="10"/></svg>`,
   },
+  {
+    name: "Password Strength Checker",
+    description: "Evaluate password strength locally with instant feedback and clear improvement suggestions.",
+    href: "/tools/password-strength-checker",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19h14"/><path d="M8 15h1"/><path d="M8 11h3"/><path d="M8 7h5"/><path d="M18 5v14"/></svg>`,
+  },
 ];
