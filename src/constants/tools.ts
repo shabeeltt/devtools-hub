@@ -8,8 +8,7 @@ export interface Tool {
 export const tools: Tool[] = [
   {
     name: "JSON Formatter",
-    description:
-      "Beautify and validate your JSON data with custom indentation.",
+    description: "Beautify and validate your JSON data with custom indentation.",
     href: "/tools/json-formatter",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6c-2 0-2 3-2 6s0 6 2 6"/><path d="M16 6c2 0 2 3 2 6s0 6-2 6"/><path d="M12 8v8"/></svg>`,
   },
@@ -27,8 +26,7 @@ export const tools: Tool[] = [
   },
   {
     name: "Diff Checker",
-    description:
-      "Compare text side by side and highlight added, removed, and changed lines.",
+    description: "Compare text side by side and highlight added, removed, and changed lines.",
     href: "/tools/diff-checker",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M18 4v16"/><path d="M9 8h4"/><path d="M11 12h4"/><path d="M9 16h6"/></svg>`,
   },
@@ -58,15 +56,13 @@ export const tools: Tool[] = [
   },
   {
     name: "Regex Sandbox",
-    description:
-      "Test and debug regular expressions visually with real-time highlighting and capture groups.",
+    description: "Test and debug regular expressions visually with real-time highlighting and capture groups.",
     href: "/tools/regex-sandbox",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4a10 10 0 0 0 0 16"/><path d="M16 4a10 10 0 0 1 0 16"/><path d="M9 15h.01"/><path d="M14.5 9v6"/><path d="m12 10.5 5 3"/><path d="m17 10.5-5 3"/></svg>`,
   },
   {
     name: "API Tester (Beta)",
-    description:
-      "A lightweight, no-fuss client to send REST API requests and instantly inspect JSON responses.",
+    description: "A lightweight, no-fuss client to send REST API requests and instantly inspect JSON responses.",
     href: "/tools/api-tester",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>`,
   },
@@ -78,8 +74,7 @@ export const tools: Tool[] = [
   },
   {
     name: "Cron Expression Generator",
-    description:
-      "Build, validate, and understand cron expressions with a visual editor and plain English explanations.",
+    description: "Build, validate, and understand cron expressions with a visual editor and plain English explanations.",
     href: "/tools/cron-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M4 4l3 3"/><path d="M20 4l-3 3"/></svg>`,
   },
@@ -91,43 +86,37 @@ export const tools: Tool[] = [
   },
   {
     name: "Text Case Modifier",
-    description:
-      "Convert text between UPPERCASE, lowercase, Title Case, camelCase, PascalCase, snake_case, and kebab-case.",
+    description: "Convert text between UPPERCASE, lowercase, Title Case, camelCase, PascalCase, snake_case, and kebab-case.",
     href: "/tools/text-case-modifier",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V6"/><path d="M4 12h8"/><path d="M12 6v12"/><path d="M17 10h4"/><path d="M19 8v4"/><path d="M17 18h4"/></svg>`,
   },
   {
     name: "Text ↔ Binary Converter",
-    description:
-      "Convert plain text to binary (0s and 1s) and binary back to readable text instantly.",
+    description: "Convert plain text to binary (0s and 1s) and binary back to readable text instantly.",
     href: "/tools/text-to-binary",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="4" height="4" x="2" y="2" rx="1"/><rect width="4" height="4" x="10" y="2" rx="1"/><rect width="4" height="4" x="18" y="2" rx="1"/><rect width="4" height="4" x="2" y="10" rx="1"/><rect width="4" height="4" x="18" y="10" rx="1"/><rect width="4" height="4" x="10" y="18" rx="1"/><rect width="4" height="4" x="18" y="18" rx="1"/></svg>`,
   },
   {
     name: "Lorem Ipsum Generator",
-    description:
-      "Generate customizable Lorem Ipsum placeholder text by words, sentences, or paragraphs.",
+    description: "Generate customizable Lorem Ipsum placeholder text by words, sentences, or paragraphs.",
     href: "/tools/lorem-ipsum-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 11h16"/><path d="M4 15h10"/></svg>`,
   },
   {
     name: "Color Converter",
-    description:
-      "Convert colors between HEX, RGB, HSL, and CSS named formats with a live preview.",
+    description: "Convert colors between HEX, RGB, HSL, and CSS named formats with a live preview.",
     href: "/tools/color-converter",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="3"/><circle cx="7.5" cy="13.5" r="3"/><circle cx="16.5" cy="16.5" r="3"/><path d="M10 11.2 12 13"/><path d="M10.4 15.6 12.6 14"/><path d="M15.2 14 16 15.4"/></svg>`,
   },
   {
     name: "Gitignore Generator",
-    description:
-      "Generate a customized, production-ready .gitignore file based on the technology you use.",
+    description: "Generate a customized, production-ready .gitignore file based on the technology you use.",
     href: "/tools/gitignore-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`,
   },
   {
     name: "Markdown Preview",
-    description:
-      "Live preview your Markdown as HTML with real-time rendering and sanitized output.",
+    description: "Live preview your Markdown as HTML with real-time rendering and sanitized output.",
     href: "/tools/markdown-preview",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
   },
@@ -139,41 +128,44 @@ export const tools: Tool[] = [
   },
   {
     name: "JSON ↔ CSV Converter",
-    description:
-      "Convert JSON arrays to CSV and CSV data back into JSON instantly.",
+    description: "Convert JSON arrays to CSV and CSV data back into JSON instantly.",
     href: "/tools/json-csv-converter",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m10 10 4 4"/><path d="m14 10-4 4"/></svg>`,
   },
   {
-  name: "HTML Live Preview",
-  description: "Preview HTML instantly with safe browser-side rendering.",
-  href: "/tools/html-live-preview",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="M14 4h6"/><path d="M14 20h6"/></svg>`,
-},
-{
-  name: "SQL Formatter",
-  description:
-    "Beautify your raw SQL queries with clean spacing and line breaks automatically.",
-  href: "/tools/sql-formatter",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/></svg>`,
-},
-{
-  name: "XML Formatter",
-  description: "Format and validate XML with clean readable output.",
-  href: "/tools/xml-formatter",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 4-4 16"/></svg>`,
-},
-{
-  name: "CSS Unit Converter",
-  description: "Convert between px, em, rem, %, vw and vh units.",
-  href: "/tools/css-unit-converter",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>`,
-},
-{
-  name: "CSS Gradient Generator",
-  description:
-    "Generate CSS gradients visually with live preview and exportable CSS code.",
-  href: "/tools/css-gradient-generator",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
-},
+    name: "SQL Formatter",
+    description: "Beautify your raw SQL queries with clean spacing and line breaks automatically.",
+    href: "/tools/sql-formatter",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/></svg>`,
+  },
+  {
+    name: "XML Formatter",
+    description: "Format and validate XML with clean readable output.",
+    href: "/tools/xml-formatter",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 4-4 16"/></svg>`,
+  },
+  {
+    name: "CSS Unit Converter",
+    description: "Convert between px, em, rem, %, vw and vh units.",
+    href: "/tools/css-unit-converter",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>`,
+  },
+  {
+    name: "CSS Gradient Generator",
+    description: "Generate CSS gradients visually with live preview and exportable CSS code.",
+    href: "/tools/css-gradient-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
+  },
+  {
+    name: "Password Generator",
+    description: "Generate secure random passwords with customizable length and character options.",
+    href: "/tools/password-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M5 8h14"/><path d="M5 16h14"/><circle cx="12" cy="12" r="10"/></svg>`,
+  },
+  {
+    name: "Password Strength Checker",
+    description: "Evaluate password strength locally with instant feedback and clear improvement suggestions.",
+    href: "/tools/password-strength-checker",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19h14"/><path d="M8 15h1"/><path d="M8 11h3"/><path d="M8 7h5"/><path d="M18 5v14"/></svg>`,
+  },
 ];
