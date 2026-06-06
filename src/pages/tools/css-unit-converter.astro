@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CssUnitConverter from "../../features/css-unit-converter/CssUnitConverter";
+---
+
+<BaseLayout
+  title="CSS Unit Converter | Free Developer Tool"
+  description="Convert between px, em, rem, %, vw and vh instantly."
+>
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-white tracking-tight mb-2">
+      CSS Unit Converter
+    </h2>
+
+    <p class="text-neutral-400">
+      Convert between common CSS units instantly.
+    </p>
+  </div>
+
+  <CssUnitConverter client:load />
+</BaseLayout>

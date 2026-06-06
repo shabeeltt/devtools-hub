@@ -40,19 +40,20 @@ export default function HtmlLivePreview() {
             Live Preview
           </label>
 
-          <div className="h-[430px] overflow-auto rounded-xl border border-border bg-surface p-4">
-            {hasInput ? (
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: input,
-                }}
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-muted">
-                Preview will appear here
-              </div>
-            )}
-          </div>
+          <div className="h-[430px] overflow-hidden rounded-xl border border-border bg-surface">
+  {hasInput ? (
+    <iframe
+      title="HTML Preview"
+      sandbox=""
+      srcDoc={input}
+      className="h-full w-full border-0"
+    />
+  ) : (
+    <div className="flex h-full items-center justify-center text-muted">
+      Preview will appear here
+    </div>
+  )}
+</div>
         </div>
       </div>
 
