@@ -67,20 +67,20 @@ export default function CssUnitConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-border bg-surface p-4 space-y-4">
+      <div className="space-y-4 rounded-xl border border-border bg-surface p-4">
         <input
           type="number"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Enter value"
-          className="w-full rounded-lg border border-border bg-background p-3"
+          className="w-full rounded-lg border border-border bg-background p-3 text-primary"
         />
 
         <div className="grid grid-cols-2 gap-4">
           <select
             value={fromUnit}
             onChange={(e) => setFromUnit(e.target.value)}
-            className="rounded-lg border border-border bg-background p-3"
+            className="rounded-lg border border-border bg-background p-3 text-primary"
           >
             {UNITS.map((unit) => (
               <option key={unit}>{unit}</option>
@@ -90,7 +90,7 @@ export default function CssUnitConverter() {
           <select
             value={toUnit}
             onChange={(e) => setToUnit(e.target.value)}
-            className="rounded-lg border border-border bg-background p-3"
+            className="rounded-lg border border-border bg-background p-3 text-primary"
           >
             {UNITS.map((unit) => (
               <option key={unit}>{unit}</option>
@@ -113,7 +113,7 @@ export default function CssUnitConverter() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs text-secondary">Result</p>
-            <p className="font-mono text-lg">
+            <p className="font-mono text-lg text-primary">
               {result} {toUnit}
             </p>
           </div>
