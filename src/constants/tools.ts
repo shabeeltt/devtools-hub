@@ -176,4 +176,33 @@ export const tools: Tool[] = [
   href: "/tools/css-gradient-generator",
   icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
 },
+{
+  name: "Password Generator",
+  description:
+    "Generate secure random passwords with customizable length and character options.",
+  href: "/tools/password-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M5 8h14"/><path d="M5 16h14"/><circle cx="12" cy="12" r="10"/></svg>`,
+},
+{
+  name: "CSS Clamp Generator",
+  description: "Generate responsive CSS clamp() expressions with live preview.",
+  href: "/tools/css-clamp-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M8 4h8"/>
+    <path d="M8 20h8"/>
+    <path d="M12 4v16"/>
+  </svg>`,
+},
+{
+  name: "Flexbox Generator",
+  description: "Configure Flexbox layouts visually and generate CSS with a live preview.",
+  href: "/tools/flexbox-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h8"/><path d="M4 17h16"/><path d="M20 8v10"/><path d="M12 3v4"/></svg>`,
+},
+{
+  name: "Border Radius Generator",
+  description: "Generate rounded-corner CSS with a live preview and copy-ready border-radius output.",
+  href: "/tools/border-radius-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M9 4V9H4"/><path d="M20 15V20H15"/></svg>`,
+},
 ];
