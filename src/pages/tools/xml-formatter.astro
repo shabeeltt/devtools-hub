@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import XmlFormatter from "../../features/xml-formatter/XmlFormatter";
+---
+
+<BaseLayout
+  title="XML Formatter | Free Developer Tool"
+  description="Format and validate XML instantly in your browser."
+>
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-white tracking-tight mb-2">
+      XML Formatter
+    </h2>
+
+    <p class="text-neutral-400">
+      Format and validate XML instantly with clean readable output.
+    </p>
+  </div>
+
+  <XmlFormatter client:load />
+</BaseLayout>

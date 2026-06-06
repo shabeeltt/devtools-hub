@@ -21,6 +21,7 @@
     "dompurify": "^3.4.7",
     "fuse.js": "^7.3.0",
     "highlight.js": "^11.11.1",
+    "html5-qrcode": "^2.3.8",
     "marked": "^18.0.4",
     "marked-highlight": "^2.2.4",
     "papaparse": "^5.5.3",
