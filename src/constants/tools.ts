@@ -170,4 +170,16 @@ export const tools: Tool[] = [
     href: "/tools/css-gradient-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
   },
+  {
+    name: "CSS Box Shadow Generator",
+    description: "Build CSS box-shadow styles with live preview, sliders, and copyable output.",
+    href: "/tools/box-shadow-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 10l-2 2"/><path d="M16 10l2 2"/><path d="M16 14l2-2"/><path d="M8 14l-2-2"/></svg>`,
+  },
+  {
+    name: "Password Generator",
+    description: "Generate secure random passwords with customizable length and character options.",
+    href: "/tools/password-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M5 8h14"/><path d="M5 16h14"/><circle cx="12" cy="12" r="10"/></svg>`,
+  },
 ];
