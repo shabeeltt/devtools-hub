@@ -4,10 +4,18 @@ import ColorPaletteGenerator from "../../features/color-palette-generator/ColorP
 ---
 
 <BaseLayout
-  title="Color Palette & Gradient Generator | Free Online Developer Tool"
-  description="Create linear and radial gradients with multiple color stops, preview them live, and copy CSS output."
+  title="Color Palette Generator | Free Online Developer Tool"
+  description="Generate cohesive color palettes with various color harmonies and export them, or create multi-stop CSS gradients."
 >
-  <h2 class="mb-6 text-2xl font-semibold">Color Palette & Gradient Generator</h2>
+  <div class="mb-8">
+    <h2 class="mb-2 text-3xl font-bold tracking-tight text-primary">
+      Color Palette Generator
+    </h2>
+
+    <p class="text-secondary">
+      Generate cohesive color palettes with various color harmonies and export them, or create multi-stop CSS gradients.
+    </p>
+  </div>
 
   <ColorPaletteGenerator client:load />
 </BaseLayout>

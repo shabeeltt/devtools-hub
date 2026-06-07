@@ -176,4 +176,18 @@ export const tools: Tool[] = [
   href: "/tools/css-gradient-generator",
   icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
 },
+{
+  name: "Color Palette Generator",
+  description:
+    "Generate beautiful color schemes with different harmonies and export them, or create multi-stop CSS gradients.",
+  href: "/tools/color-palette-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.3442 19.4856 6.0964 19.3496 6.3683 18.7297C6.73286 17.8986 7.55998 17.3333 8.5 17.3333H9.83333C10.7558 17.3333 11.5 18.0775 11.5 19V20.8333C11.5 21.4777 11.7589 21.9841 12 22Z"/><circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/><circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"/></svg>`,
+},
+{
+  name: "Password Generator",
+  description:
+    "Generate secure, randomized passwords or memorable passphrases with customizable length and complexity.",
+  href: "/tools/password-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>`,
+},
 ];
