@@ -170,7 +170,7 @@ export default function CssAnimationGenerator() {
 
       <div className="grid gap-6 md:grid-cols-3">
         {/* Controls Column */}
-        <div className="space-y-5 rounded-xl border border-border bg-surface p-5 md:col-span-1">
+        <div className="space-y-5 rounded-xl border border-border bg-surface p-5 md:col-span-1 min-w-0">
           <div>
             <label className="mb-2 block text-sm font-medium text-primary">Animation Preset</label>
             <select
@@ -179,7 +179,7 @@ export default function CssAnimationGenerator() {
                 setSelectedPreset(e.target.value);
                 restartAnimation();
               }}
-              className="w-full rounded-lg border border-border bg-background p-2.5 text-sm text-primary focus:outline-none focus:border-accent"
+              className="w-full rounded-lg border border-border bg-ground p-2.5 text-sm text-primary focus:outline-none focus:border-accent min-w-0"
             >
               {Object.keys(PRESETS).map((key) => (
                 <option key={key} value={key}>
@@ -225,7 +225,7 @@ export default function CssAnimationGenerator() {
               <select
                 value={iterations}
                 onChange={(e) => setIterations(e.target.value)}
-                className="w-full rounded-lg border border-border bg-background p-2 text-sm text-primary focus:outline-none focus:border-accent"
+                className="w-full rounded-lg border border-border bg-ground p-2 text-sm text-primary focus:outline-none focus:border-accent min-w-0"
               >
                 <option value="infinite">Infinite</option>
                 <option value="1">1 time</option>
@@ -241,7 +241,7 @@ export default function CssAnimationGenerator() {
               <select
                 value={direction}
                 onChange={(e) => setDirection(e.target.value)}
-                className="w-full rounded-lg border border-border bg-background p-2 text-sm text-primary focus:outline-none focus:border-accent"
+                className="w-full rounded-lg border border-border bg-ground p-2 text-sm text-primary focus:outline-none focus:border-accent min-w-0"
               >
                 <option value="normal">Normal</option>
                 <option value="reverse">Reverse</option>
@@ -257,7 +257,7 @@ export default function CssAnimationGenerator() {
               <select
                 value={timingFn}
                 onChange={(e) => setTimingFn(e.target.value)}
-                className="w-full rounded-lg border border-border bg-background p-2 text-sm text-primary focus:outline-none focus:border-accent"
+                className="w-full rounded-lg border border-border bg-ground p-2 text-sm text-primary focus:outline-none focus:border-accent min-w-0"
               >
                 <option value="linear">Linear</option>
                 <option value="ease">Ease</option>
@@ -273,7 +273,7 @@ export default function CssAnimationGenerator() {
               <select
                 value={fillMode}
                 onChange={(e) => setFillMode(e.target.value)}
-                className="w-full rounded-lg border border-border bg-background p-2 text-sm text-primary focus:outline-none focus:border-accent"
+                className="w-full rounded-lg border border-border bg-ground p-2 text-sm text-primary focus:outline-none focus:border-accent min-w-0"
               >
                 <option value="none">None</option>
                 <option value="forwards">Forwards</option>
@@ -285,7 +285,7 @@ export default function CssAnimationGenerator() {
 
           {/* Custom Cubic Bezier parameters */}
           {timingFn === "custom" && (
-            <div className="rounded-lg border border-border bg-background/55 p-3 space-y-3">
+            <div className="rounded-lg border border-border bg-ground/55 p-3 space-y-3">
               <span className="text-xs font-semibold text-secondary">Cubic-Bezier Parameters</span>
               
               <div>
@@ -367,7 +367,7 @@ export default function CssAnimationGenerator() {
         </div>
 
         {/* Preview & Output Columns */}
-        <div className="space-y-5 md:col-span-2 flex flex-col justify-between">
+        <div className="space-y-5 md:col-span-2 flex flex-col justify-between min-w-0">
           
           {/* Live Preview block */}
           <div className="rounded-xl border border-border bg-surface p-5 flex-1 flex flex-col min-h-[300px]">
@@ -427,7 +427,7 @@ export default function CssAnimationGenerator() {
               <CopyButton value={generatedCSS} />
             </div>
 
-            <pre className="overflow-auto rounded-lg bg-background p-4 text-xs font-mono text-secondary border border-border/50 max-h-48 custom-scrollbar">
+            <pre className="overflow-auto rounded-lg bg-ground p-4 text-xs font-mono text-secondary border border-border/50 max-h-48 custom-scrollbar">
               {generatedCSS}
             </pre>
           </div>
