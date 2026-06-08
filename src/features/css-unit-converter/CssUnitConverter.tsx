@@ -73,14 +73,14 @@ export default function CssUnitConverter() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Enter value"
-          className="w-full rounded-lg border border-border bg-background p-3 text-primary"
+          className="w-full rounded-lg border border-border bg-ground p-3 text-primary"
         />
 
         <div className="grid grid-cols-2 gap-4">
           <select
             value={fromUnit}
             onChange={(e) => setFromUnit(e.target.value)}
-            className="rounded-lg border border-border bg-background p-3 text-primary"
+            className="rounded-lg border border-border bg-ground p-3 text-primary min-w-0"
           >
             {UNITS.map((unit) => (
               <option key={unit}>{unit}</option>
@@ -90,7 +90,7 @@ export default function CssUnitConverter() {
           <select
             value={toUnit}
             onChange={(e) => setToUnit(e.target.value)}
-            className="rounded-lg border border-border bg-background p-3 text-primary"
+            className="rounded-lg border border-border bg-ground p-3 text-primary min-w-0"
           >
             {UNITS.map((unit) => (
               <option key={unit}>{unit}</option>
