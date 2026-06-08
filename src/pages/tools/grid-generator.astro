@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GridGenerator from "../../features/grid-generator/GridGenerator";
+---
+
+<BaseLayout
+  title="CSS Grid Generator | Free Online Developer Tool"
+  description="Visually configure CSS Grid properties and generate copyable CSS with live preview."
+>
+  <h2 class="mb-6 text-2xl font-semibold">CSS Grid Generator</h2>
+
+  <GridGenerator client:load />
+</BaseLayout>

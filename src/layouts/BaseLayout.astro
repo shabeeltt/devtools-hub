@@ -74,7 +74,7 @@ const {
 
   <body class="flex min-h-screen flex-col bg-ground text-secondary antialiased selection:bg-accent/30">
     <header class="sticky top-0 z-50 border-b border-border bg-header-bg backdrop-blur-md">
-      <div class="mx-auto flex max-w-7xl items-center justify-between gap-8 px-6 py-4">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 sm:gap-8 px-4 sm:px-6 py-4">
         <a href="/" class="flex items-center gap-2 transition-opacity hover:opacity-80 shrink-0">
           <Image src="/icon.png" alt="DevToolsHub Logo" width={32} height={32} loading="eager" class="size-8" />
           <h1 class="text-xl font-bold tracking-tight text-primary hidden sm:block">DevToolsHub</h1>
@@ -91,7 +91,7 @@ const {
       </div>
     </header>
 
-    <main class="mx-auto w-full max-w-7xl flex-1 px-6 py-12">
+    <main class="mx-auto w-full max-w-7xl flex-1 px-4 sm:px-6 py-12">
       {isToolPage && (
         <>
           <button
@@ -126,7 +126,7 @@ const {
       <slot />
     </main>
 
-    <footer class="mt-auto border-t border-border px-6 py-8 text-right text-sm text-muted">
+    <footer class="mt-auto border-t border-border px-4 sm:px-6 py-8 text-right text-sm text-muted">
       <p>&copy; {new Date().getFullYear()} DevToolsHub. Open source starter.</p>
     </footer>
 
