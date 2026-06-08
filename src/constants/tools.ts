@@ -168,4 +168,36 @@ export const tools: Tool[] = [
     href: "/tools/password-strength-checker",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19h14"/><path d="M8 15h1"/><path d="M8 11h3"/><path d="M8 7h5"/><path d="M18 5v14"/></svg>`,
   },
+  {
+  name: "HTML Live Preview",
+  description: "Preview HTML instantly with safe browser-side rendering.",
+  href: "/tools/html-live-preview",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="M14 4h6"/><path d="M14 20h6"/></svg>`,
+},
+{
+  name: "SQL Formatter",
+  description:
+    "Beautify your raw SQL queries with clean spacing and line breaks automatically.",
+  href: "/tools/sql-formatter",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/></svg>`,
+},
+{
+  name: "XML Formatter",
+  description: "Format and validate XML with clean readable output.",
+  href: "/tools/xml-formatter",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 4-4 16"/></svg>`,
+},
+{
+  name: "CSS Unit Converter",
+  description: "Convert between px, em, rem, %, vw and vh units.",
+  href: "/tools/css-unit-converter",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>`,
+},
+{
+  name: "CSS Gradient Generator",
+  description:
+    "Generate CSS gradients visually with live preview and exportable CSS code.",
+  href: "/tools/css-gradient-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
+},
 ];
