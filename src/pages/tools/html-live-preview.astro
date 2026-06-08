@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HtmlLivePreview from "../../features/html-live-preview/HtmlLivePreview";
+---
+
+<BaseLayout
+  title="HTML Live Preview | Free Developer Tool"
+  description="Preview HTML instantly in your browser with live rendering."
+>
+  <div class="mb-8">
+    <h2 class="text-3xl font-bold text-white tracking-tight mb-2">
+      HTML Live Preview
+    </h2>
+
+    <p class="text-neutral-400">
+      Preview HTML instantly with safe browser-side rendering.
+    </p>
+  </div>
+
+  <HtmlLivePreview client:load />
+</BaseLayout>
