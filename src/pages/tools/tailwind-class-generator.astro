@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TailwindClassGenerator from "../../features/tailwind-class-generator/TailwindClassGenerator";
+---
+
+<BaseLayout
+  title="Tailwind Class Generator | Visual Tailwind CSS Builder"
+  description="Generate Tailwind CSS utility classes visually with an interactive live preview, custom templates, responsive breakpoints, and instant code exports."
+>
+  <div class="mb-8">
+    <h2 class="mb-2 text-3xl font-bold tracking-tight text-primary">
+      Tailwind Class Generator
+    </h2>
+
+    <p class="text-secondary">
+      Visually build Tailwind CSS utility classes with real-time responsive preview, custom text styling, presets, and copyable snippets.
+    </p>
+  </div>
+
+  <TailwindClassGenerator client:load />
+</BaseLayout>
