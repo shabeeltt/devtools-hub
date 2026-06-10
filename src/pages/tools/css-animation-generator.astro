@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CssAnimationGenerator from "../../features/css-animation-generator/CssAnimationGenerator";
+---
+
+<BaseLayout
+  title="CSS Animation Generator | Visual Keyframe & Easing Creator"
+  description="Create and customize CSS keyframe animations visually, preview them in real time, and copy production-ready CSS code."
+>
+  <div class="mb-8">
+    <h2 class="mb-2 text-3xl font-bold tracking-tight text-primary">
+      CSS Animation Generator
+    </h2>
+
+    <p class="text-secondary">
+      Visually design CSS animations with delay, duration, easing, and direction controls, and copy the generated CSS & keyframes.
+    </p>
+  </div>
+
+  <CssAnimationGenerator client:load />
+</BaseLayout>

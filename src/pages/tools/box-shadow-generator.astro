@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BoxShadowGenerator from "../../features/box-shadow-generator/BoxShadowGenerator";
+---
+
+<BaseLayout
+  title="Box Shadow Generator | CSS Box Shadow Builder"
+  description="Create and preview CSS box-shadow styles instantly with live controls and copyable output."
+>
+  <h2 class="mb-6 text-2xl font-semibold">
+    CSS Box Shadow Generator
+  </h2>
+
+  <BoxShadowGenerator client:load />
+</BaseLayout>
