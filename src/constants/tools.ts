@@ -132,7 +132,14 @@ export const tools: Tool[] = [
     href: "/tools/json-csv-converter",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m10 10 4 4"/><path d="m14 10-4 4"/></svg>`,
   },
-  {
+    {
+    name: "YAML ↔ JSON Converter",
+    description:
+      "Convert YAML to JSON and JSON to YAML instantly in your browser.",
+    href: "/tools/yaml-json-converter",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h8"/><path d="M8 12h8"/><path d="M8 18h8"/><path d="m15 9 3 3-3 3"/><path d="m9 15-3-3 3-3"/></svg>`,
+    },
+      {
     name: "Password Generator",
     description: "Generate secure random passwords with customizable length and character options.",
     href: "/tools/password-generator",
