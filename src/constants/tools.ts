@@ -200,4 +200,10 @@ export const tools: Tool[] = [
     href: "/tools/css-animation-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
   },
+  {
+    name: "CSS Box Shadow Generator",
+    description: "Build CSS box-shadow styles with live preview, sliders, and copyable output.",
+    href: "/tools/box-shadow-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 10l-2 2"/><path d="M16 10l2 2"/><path d="M16 14l2-2"/><path d="M8 14l-2-2"/></svg>`,
+  },
 ];
