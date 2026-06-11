@@ -1,6 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import YAML from "yaml";
-import Button from "../../ui/Button";
 import CopyButton from "../../ui/CopyButton";
 import ToolTextarea from "../../components/tool/ToolTextarea";
 
@@ -422,7 +421,7 @@ export default function OpenApiSwaggerViewer() {
   };
 
   // Run initial parse on sample load
-  useMemo(() => {
+  useEffect(() => {
     handleParse(inputSpec);
   }, []);
 
@@ -464,11 +463,15 @@ export default function OpenApiSwaggerViewer() {
     // Filter by query
     const filtered = endpoints.filter((item) => {
       const q = searchQuery.toLowerCase();
+
       return (
+        item.tag.toLowerCase().includes(q) ||
         item.path.toLowerCase().includes(q) ||
         item.method.toLowerCase().includes(q) ||
-        (item.operation.summary && item.operation.summary.toLowerCase().includes(q)) ||
-        (item.operation.description && item.operation.description.toLowerCase().includes(q))
+        (item.operation.summary &&
+          item.operation.summary.toLowerCase().includes(q)) ||
+        (item.operation.description &&
+          item.operation.description.toLowerCase().includes(q))
       );
     });
 
@@ -597,6 +600,35 @@ export default function OpenApiSwaggerViewer() {
                 {parsedSpec.info?.description && (
                   <p className="text-sm text-secondary leading-relaxed">{parsedSpec.info.description}</p>
                 )}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="rounded-lg border border-border p-3 bg-surface/40">
+                    <div className="text-xs text-muted">OpenAPI</div>
+                    <div className="font-semibold">
+                      {parsedSpec.openapi || parsedSpec.swagger}
+                    </div>
+                  </div>
+
+                  <div className="rounded-lg border border-border p-3 bg-surface/40">
+                    <div className="text-xs text-muted">Endpoints</div>
+                    <div className="font-semibold">
+                      {Object.keys(parsedSpec.paths || {}).length}
+                    </div>
+                  </div>
+
+                  <div className="rounded-lg border border-border p-3 bg-surface/40">
+                    <div className="text-xs text-muted">Servers</div>
+                    <div className="font-semibold">
+                      {parsedSpec.servers?.length || 0}
+                    </div>
+                  </div>
+
+                  <div className="rounded-lg border border-border p-3 bg-surface/40">
+                    <div className="text-xs text-muted">Schemas</div>
+                    <div className="font-semibold">
+                      {Object.keys(parsedSpec.components?.schemas || {}).length}
+                    </div>
+                  </div>
+                </div>
 
                 {parsedSpec.servers && parsedSpec.servers.length > 0 && (
                   <div className="pt-3 border-t border-border/60">
@@ -656,15 +688,21 @@ export default function OpenApiSwaggerViewer() {
 
                       <div className="space-y-2">
                         {group.items.map((endpoint) => {
+                          const curlCommand = generateCurl(
+                            endpoint.path,
+                            endpoint.method,
+                            endpoint.operation,
+                            parsedSpec.components,
+                            activeServerUrl
+                          );
                           const key = `${endpoint.method.toLowerCase()}-${endpoint.path}`;
                           const isExpanded = !!expandedEndpoints[key];
 
                           return (
                             <div
                               key={key}
-                              className={`rounded-xl border border-border bg-surface transition-all overflow-hidden ${
-                                isExpanded ? "shadow-sm border-border-hover" : ""
-                              }`}
+                              className={`rounded-xl border border-border bg-surface transition-all overflow-hidden ${isExpanded ? "shadow-sm border-border-hover" : ""
+                                }`}
                             >
                               {/* Accordion Trigger */}
                               <button
@@ -690,9 +728,8 @@ export default function OpenApiSwaggerViewer() {
                                   fill="none"
                                   stroke="currentColor"
                                   strokeWidth="2"
-                                  className={`text-muted transition-transform duration-200 ${
-                                    isExpanded ? "rotate-180" : ""
-                                  }`}
+                                  className={`text-muted transition-transform duration-200 ${isExpanded ? "rotate-180" : ""
+                                    }`}
                                 >
                                   <path d="m6 9 6 6 6-6" />
                                 </svg>
@@ -701,12 +738,20 @@ export default function OpenApiSwaggerViewer() {
                               {/* Accordion Content */}
                               {isExpanded && (
                                 <div className="p-4 border-t border-border space-y-5 bg-ground/25 animate-in fade-in duration-200">
+                                  {/* Operation ID */}
+                                  {endpoint.operation.operationId && (
+                                    <div className="text-xs font-mono bg-surface border border-border rounded-lg px-3 py-2">
+                                      operationId: {endpoint.operation.operationId}
+                                    </div>
+                                  )}
+
                                   {/* Description */}
                                   {endpoint.operation.description && (
                                     <div className="text-sm text-secondary leading-relaxed bg-surface/35 p-3 rounded-lg border border-border/50">
                                       {endpoint.operation.description}
                                     </div>
                                   )}
+
 
                                   {/* Copy Path Helper */}
                                   <div className="flex gap-2 items-center text-xs font-mono bg-surface border border-border px-3 py-2 rounded-lg justify-between">
@@ -862,28 +907,16 @@ export default function OpenApiSwaggerViewer() {
                                       <h5 className="text-xs font-bold uppercase tracking-wider text-muted">
                                         Mock Curl Request
                                       </h5>
-                                      <CopyButton
-                                        value={generateCurl(
-                                          endpoint.path,
-                                          endpoint.method,
-                                          endpoint.operation,
-                                          parsedSpec.components,
-                                          activeServerUrl
-                                        )}
-                                      />
+                                      <CopyButton value={curlCommand} />
                                     </div>
+
                                     <pre className="overflow-x-auto rounded-lg border border-border bg-surface p-3 font-mono text-xs text-primary max-h-48 custom-scrollbar">
-                                      {generateCurl(
-                                        endpoint.path,
-                                        endpoint.method,
-                                        endpoint.operation,
-                                        parsedSpec.components,
-                                        activeServerUrl
-                                      )}
+                                      {curlCommand}
                                     </pre>
                                   </div>
                                 </div>
-                              )}
+                              )
+                              }
                             </div>
                           );
                         })}
@@ -896,6 +929,6 @@ export default function OpenApiSwaggerViewer() {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 }
