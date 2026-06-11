@@ -1,11 +1,16 @@
 import { useMemo, useState } from "react";
 import CopyButton from "../../ui/CopyButton";
 
+type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse";
+type JustifyContent = "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly";
+type AlignItems = "stretch" | "flex-start" | "center" | "flex-end" | "baseline";
+type FlexWrap = "nowrap" | "wrap" | "wrap-reverse";
+
 export default function FlexboxGenerator() {
-  const [direction, setDirection] = useState("row");
-  const [justifyContent, setJustifyContent] = useState("center");
-  const [alignItems, setAlignItems] = useState("center");
-  const [wrap, setWrap] = useState("nowrap");
+  const [direction, setDirection] = useState<FlexDirection>("row");
+  const [justifyContent, setJustifyContent] = useState<JustifyContent>("center");
+  const [alignItems, setAlignItems] = useState<AlignItems>("center");
+  const [wrap, setWrap] = useState<FlexWrap>("nowrap");
   const [gap, setGap] = useState("16px");
 
   const formattedCss = useMemo(
@@ -17,10 +22,10 @@ export default function FlexboxGenerator() {
   const previewStyles = useMemo(
     () => ({
       display: "flex",
-      flexDirection: direction as React.CSSProperties["flexDirection"],
-      justifyContent: justifyContent as React.CSSProperties["justifyContent"],
-      alignItems: alignItems as React.CSSProperties["alignItems"],
-      flexWrap: wrap as React.CSSProperties["flexWrap"],
+      flexDirection: direction,
+      justifyContent: justifyContent,
+      alignItems: alignItems,
+      flexWrap: wrap,
       gap,
       padding: "1rem",
       minHeight: "200px",
@@ -37,7 +42,7 @@ export default function FlexboxGenerator() {
           <label className="mb-2 block text-sm font-medium">Flex Direction</label>
           <select
             value={direction}
-            onChange={(event) => setDirection(event.target.value)}
+            onChange={(event) => setDirection(event.target.value as FlexDirection)}
             className="w-full rounded-xl border border-border bg-surface p-3"
           >
             <option value="row">row</option>
@@ -51,7 +56,7 @@ export default function FlexboxGenerator() {
           <label className="mb-2 block text-sm font-medium">Justify Content</label>
           <select
             value={justifyContent}
-            onChange={(event) => setJustifyContent(event.target.value)}
+            onChange={(event) => setJustifyContent(event.target.value as JustifyContent)}
             className="w-full rounded-xl border border-border bg-surface p-3"
           >
             <option value="flex-start">flex-start</option>
@@ -67,7 +72,7 @@ export default function FlexboxGenerator() {
           <label className="mb-2 block text-sm font-medium">Align Items</label>
           <select
             value={alignItems}
-            onChange={(event) => setAlignItems(event.target.value)}
+            onChange={(event) => setAlignItems(event.target.value as AlignItems)}
             className="w-full rounded-xl border border-border bg-surface p-3"
           >
             <option value="stretch">stretch</option>
@@ -82,7 +87,7 @@ export default function FlexboxGenerator() {
           <label className="mb-2 block text-sm font-medium">Flex Wrap</label>
           <select
             value={wrap}
-            onChange={(event) => setWrap(event.target.value)}
+            onChange={(event) => setWrap(event.target.value as FlexWrap)}
             className="w-full rounded-xl border border-border bg-surface p-3"
           >
             <option value="nowrap">nowrap</option>
