@@ -1,11 +1,16 @@
-// utils/apiRequest.ts
+export const HTTP_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"] as const;
 
-export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+export type HttpMethod = (typeof HTTP_METHODS)[number];
+
+export const METHODS_WITH_BODY = new Set<HttpMethod>(["POST", "PUT", "PATCH"]);
+
+export type Header = { key: string; value: string };
 
 export interface ApiRequestOptions {
   method: HttpMethod;
   url: string;
   body?: string;
+  headers?: Record<string, string>;
 }
 
 export interface ApiResponse {
@@ -19,19 +24,22 @@ export interface ApiResponse {
 export async function apiRequest(
   options: ApiRequestOptions,
 ): Promise<ApiResponse> {
-  const { method, url, body } = options;
+  const { method, url, body, headers } = options;
 
   const startTime = performance.now();
 
   try {
-    const hasBody = ["POST", "PUT", "PATCH"].includes(method);
+    const hasBody = METHODS_WITH_BODY.has(method);
+
+    const requestHeaders: Record<string, string> = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      ...(headers || {}),
+    };
 
     const requestOptions: RequestInit = {
       method,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      headers: requestHeaders,
     };
 
     if (hasBody && body && body.trim()) {
