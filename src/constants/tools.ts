@@ -132,31 +132,14 @@ export const tools: Tool[] = [
     href: "/tools/json-csv-converter",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18"/><path d="M16 3v18"/><path d="M3 8h18"/><path d="M3 16h18"/><path d="m10 10 4 4"/><path d="m14 10-4 4"/></svg>`,
   },
-  {
-    name: "SQL Formatter",
-    description: "Beautify your raw SQL queries with clean spacing and line breaks automatically.",
-    href: "/tools/sql-formatter",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16"/><path d="M4 12h10"/><path d="M4 17h16"/></svg>`,
-  },
-  {
-    name: "XML Formatter",
-    description: "Format and validate XML with clean readable output.",
-    href: "/tools/xml-formatter",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 4-4 16"/></svg>`,
-  },
-  {
-    name: "CSS Unit Converter",
-    description: "Convert between px, em, rem, %, vw and vh units.",
-    href: "/tools/css-unit-converter",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>`,
-  },
-  {
-    name: "CSS Gradient Generator",
-    description: "Generate CSS gradients visually with live preview and exportable CSS code.",
-    href: "/tools/css-gradient-generator",
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
-  },
-  {
+    {
+    name: "YAML ↔ JSON Converter",
+    description:
+      "Convert YAML to JSON and JSON to YAML instantly in your browser.",
+    href: "/tools/yaml-json-converter",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h8"/><path d="M8 12h8"/><path d="M8 18h8"/><path d="m15 9 3 3-3 3"/><path d="m9 15-3-3 3-3"/></svg>`,
+    },
+      {
     name: "Password Generator",
     description: "Generate secure random passwords with customizable length and character options.",
     href: "/tools/password-generator",
@@ -194,12 +177,22 @@ export const tools: Tool[] = [
   icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8"/><path d="M12 8v8"/><circle cx="12" cy="12" r="9"/></svg>`,
 },
 {
-  name: "CSS Gradient Generator",
-  description:
-    "Generate CSS gradients visually with live preview and exportable CSS code.",
-  href: "/tools/css-gradient-generator",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/></svg>`,
+  name: "CSS Clamp Generator",
+  description: "Generate responsive CSS clamp() expressions with live preview.",
+  href: "/tools/css-clamp-generator",
+  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M8 4h8"/>
+    <path d="M8 20h8"/>
+    <path d="M12 4v16"/>
+  </svg>`,
 },
+  {
+    name: "Color Palette Generator",
+    description:
+      "Generate beautiful color schemes with different harmonies and export them, or create multi-stop CSS gradients.",
+    href: "/tools/color-palette-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19C5.3442 19.4856 6.0964 19.3496 6.3683 18.7297C6.73286 17.8986 7.55998 17.3333 8.5 17.3333H9.83333C10.7558 17.3333 11.5 18.0775 11.5 19V20.8333C11.5 21.4777 11.7589 21.9841 12 22Z"/><circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/><circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"/></svg>`,
+  },
   {
     name: "CSS Grid Generator",
     description:
@@ -207,7 +200,7 @@ export const tools: Tool[] = [
     href: "/tools/grid-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>`,
   },
-    {
+  {
     name: "CSS Gradient Generator",
     description:
       "Generate CSS gradients visually with live preview and exportable CSS code.",
@@ -220,6 +213,12 @@ export const tools: Tool[] = [
       "Visually design CSS animations with delay, duration, easing, and direction controls, and copy the generated CSS & keyframes.",
     href: "/tools/css-animation-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
+  },
+  {
+    name: "CSS Box Shadow Generator",
+    description: "Build CSS box-shadow styles with live preview, sliders, and copyable output.",
+    href: "/tools/box-shadow-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 10l-2 2"/><path d="M16 10l2 2"/><path d="M16 14l2-2"/><path d="M8 14l-2-2"/></svg>`,
   },
   {
     name: "Flexbox Generator",

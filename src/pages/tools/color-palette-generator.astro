@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ColorPaletteGenerator from "../../features/color-palette-generator/ColorPaletteGenerator";
+---
+
+<BaseLayout
+  title="Color Palette Generator | Free Online Developer Tool"
+  description="Generate cohesive color palettes with various color harmonies and export them, or create multi-stop CSS gradients."
+>
+  <div class="mb-8">
+    <h2 class="mb-2 text-3xl font-bold tracking-tight text-primary">
+      Color Palette Generator
+    </h2>
+
+    <p class="text-secondary">
+      Generate cohesive color palettes with various color harmonies and export them, or create multi-stop CSS gradients.
+    </p>
+  </div>
+
+  <ColorPaletteGenerator client:load />
+</BaseLayout>
