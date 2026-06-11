@@ -215,6 +215,12 @@ export const tools: Tool[] = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
   },
   {
+    name: "Tailwind Class Generator",
+    description: "Build Tailwind CSS utility classes visually with live preview and copyable output.",
+    href: "/tools/tailwind-class-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+  },
+  {
     name: "CSS Box Shadow Generator",
     description: "Build CSS box-shadow styles with live preview, sliders, and copyable output.",
     href: "/tools/box-shadow-generator",
