@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import JwtGeneratorValidator from "../../features/jwt-generator-validator/JwtGeneratorValidator";
+---
+
+<BaseLayout
+  title="JWT Generator & Validator | Free Online JSON Web Token Creator"
+  description="Generate, inspect, decode, and verify JSON Web Tokens (JWT) locally and securely in your browser. Supports HS256/384/512 algorithms."
+>
+  <div class="mb-8">
+    <h2 class="mb-2 text-3xl font-bold tracking-tight text-primary">
+      JWT Generator & Validator
+    </h2>
+    <p class="text-secondary">
+      Generate and validate JSON Web Tokens locally and securely in your browser.
+    </p>
+  </div>
+
+  <JwtGeneratorValidator client:load />
+</BaseLayout>
