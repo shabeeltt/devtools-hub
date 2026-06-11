@@ -13,8 +13,6 @@ const PRESET_RADII = [
   "9999px",
 ] as const;
 
-type BorderRadiusOption = (typeof PRESET_RADII)[number];
-
 const BorderRadiusGenerator = () => {
   const [radius, setRadius] = useState<string>("16px");
   const [customRadius, setCustomRadius] = useState("16px");
@@ -33,7 +31,7 @@ const BorderRadiusGenerator = () => {
   const handleCustomChange = (event: ChangeEvent<HTMLInputElement>) => {
     const next = event.target.value;
     setCustomRadius(next);
-    setRadius(next as BorderRadiusOption);
+    setRadius(next);
   };
 
   return (
