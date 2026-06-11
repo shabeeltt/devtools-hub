@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BorderRadiusGenerator from "../../features/border-radius-generator/BorderRadiusGenerator";
+---
+
+<BaseLayout
+  title="Border Radius Generator | Free Online Developer Tool"
+  description="Generate CSS border-radius values with live preview and copy-ready output for rounded corners."
+>
+  <h2 class="mb-6 text-2xl font-semibold">Border Radius Generator</h2>
+
+  <BorderRadiusGenerator client:load />
+</BaseLayout>
