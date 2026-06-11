@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FlexboxGenerator from "../../features/flexbox-generator/FlexboxGenerator";
+---
+
+<BaseLayout
+  title="Flexbox Generator | Free Online Developer Tool"
+  description="Configure flexbox properties visually and generate CSS with a live preview."
+>
+  <h2 class="mb-6 text-2xl font-semibold">Flexbox Generator</h2>
+
+  <FlexboxGenerator client:load />
+</BaseLayout>

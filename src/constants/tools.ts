@@ -227,6 +227,12 @@ export const tools: Tool[] = [
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 10l-2 2"/><path d="M16 10l2 2"/><path d="M16 14l2-2"/><path d="M8 14l-2-2"/></svg>`,
   },
   {
+    name: "Flexbox Generator",
+    description: "Configure Flexbox layouts visually and generate CSS with a live preview.",
+    href: "/tools/flexbox-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h8"/><path d="M4 17h16"/><path d="M20 8v10"/><path d="M12 3v4"/></svg>`,
+  },
+  {
     name: "Border Radius Generator",
     description: "Generate rounded-corner CSS with a live preview and copy-ready border-radius output.",
     href: "/tools/border-radius-generator",
