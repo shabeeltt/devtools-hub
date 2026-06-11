@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import OpenApiSwaggerViewer from "../../features/openapi-swagger-viewer/OpenApiSwaggerViewer";
+---
+
+<BaseLayout
+  title="OpenAPI / Swagger Viewer | Free Online Developer Tool"
+  description="Parse and view OpenAPI/Swagger specifications visually in an interactive, clean API documentation viewer."
+>
+  <h2 class="mb-6 text-2xl font-semibold">OpenAPI / Swagger Viewer</h2>
+
+  <OpenApiSwaggerViewer client:load />
+</BaseLayout>

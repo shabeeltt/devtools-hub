@@ -238,4 +238,10 @@ export const tools: Tool[] = [
     href: "/tools/border-radius-generator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="5"/><path d="M9 4V9H4"/><path d="M20 15V20H15"/></svg>`,
   },
+  {
+    name: "OpenAPI / Swagger Viewer",
+    description: "Parse and view OpenAPI/Swagger specifications visually in an interactive, clean API documentation viewer.",
+    href: "/tools/openapi-swagger-viewer",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/><path d="M6 14h10"/></svg>`,
+  },
 ];
