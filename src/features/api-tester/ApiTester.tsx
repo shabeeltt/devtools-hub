@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToolTextarea from "../../components/tool/ToolTextarea";
 import Button from "../../ui/Button";
 import CopyButton from "../../ui/CopyButton";
-import {
-  apiRequest,
-  HTTP_METHODS,
-  type HttpMethod,
-  type ApiResponse,
-} from "../../utils/apiTester/apiRequest";
+import { apiRequest, type Header } from "../../utils/apiTester/apiRequest";
 
-type Header = {
-  key: string;
-  value: string;
-};
+type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+
+interface ApiResponse {
+  status: number;
+  statusText: string;
+  timeMs: number;
+  data: string;
+  isError: boolean;
+}
+
+interface HistoryItem {
+  method: HttpMethod;
+  url: string;
+  body: string;
+  headers: Header[];
+  response: ApiResponse;
+}
+
+const METHODS: HttpMethod[] = ["GET", "POST", "PUT", "PATCH", "DELETE"];
+
+const DEFAULT_HEADERS: Header[] = [
+  { key: "Content-Type", value: "application/json" },
+  { key: "Accept", value: "application/json" },
+];
 
 export default function ApiTester() {
   const [method, setMethod] = useState<HttpMethod>("GET");
@@ -22,27 +37,26 @@ export default function ApiTester() {
   const [reqBody, setReqBody] = useState(
     '{\n  "title": "foo",\n  "body": "bar",\n  "userId": 1\n}',
   );
+
+  const [headers, setHeaders] = useState<Header[]>(DEFAULT_HEADERS);
+
   const [response, setResponse] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const [headers, setHeaders] = useState<Header[]>([
-    { key: "Content-Type", value: "application/json" },
-  ]);
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [selectedHistory, setSelectedHistory] = useState<number | null>(null);
 
   const hasBody = ["POST", "PUT", "PATCH"].includes(method);
 
-  const addHeader = () => {
-    setHeaders((prev) => [...prev, { key: "", value: "" }]);
-  };
+  useEffect(() => {
+    const saved = localStorage.getItem("api_history");
+    if (saved) setHistory(JSON.parse(saved));
+  }, []);
 
-  const updateHeader = (index: number, field: keyof Header, value: string) => {
-    setHeaders((prev) =>
-      prev.map((h, i) => (i === index ? { ...h, [field]: value } : h)),
-    );
-  };
-
-  const removeHeader = (index: number) => {
-    setHeaders((prev) => prev.filter((_, i) => i !== index));
+  const saveHistory = (item: HistoryItem) => {
+    const updated = [item, ...history].slice(0, 10);
+    setHistory(updated);
+    localStorage.setItem("api_history", JSON.stringify(updated));
   };
 
   const handleSend = async () => {
@@ -51,22 +65,47 @@ export default function ApiTester() {
     setLoading(true);
     setResponse(null);
 
-    const headerObject = headers.reduce<Record<string, string>>((acc, h) => {
-      if (h.key.trim()) {
-        acc[h.key] = h.value;
-      }
-      return acc;
-    }, {});
-
     const result = await apiRequest({
       method,
       url,
-      body: hasBody ? reqBody : undefined,
-      headers: headerObject,
+      body: reqBody,
+      headers,
     });
 
     setResponse(result);
+
+    saveHistory({
+      method,
+      url,
+      body: reqBody,
+      headers,
+      response: result,
+    });
+
     setLoading(false);
+  };
+
+  const addHeader = () => {
+    setHeaders([...headers, { key: "", value: "" }]);
+  };
+
+  const updateHeader = (i: number, key: string, value: string) => {
+    const copy = [...headers];
+    copy[i] = { key, value };
+    setHeaders(copy);
+  };
+
+  const removeHeader = (i: number) => {
+    setHeaders(headers.filter((_, idx) => idx !== i));
+  };
+
+  const loadHistory = (item: HistoryItem, index: number) => {
+    setMethod(item.method);
+    setUrl(item.url);
+    setReqBody(item.body);
+    setHeaders(item.headers);
+    setResponse(item.response);
+    setSelectedHistory(index);
   };
 
   const getStatusColor = (status: number) => {
@@ -97,141 +136,137 @@ export default function ApiTester() {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Request Section */}
-      <div className="rounded-xl border border-border bg-surface p-4 md:p-6 space-y-4">
-        <div className="flex flex-col md:flex-row gap-3">
-          <div className="relative flex-1 flex rounded-lg border border-border bg-ground focus-within:border-accent/50 transition-colors">
-            <div className="relative flex items-center border-r border-border hover:bg-surface/50 transition-colors">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6">
+      <div className="space-y-6">
+        <div className="rounded-xl border border-border bg-surface p-4 md:p-6 space-y-4">
+          <div className="flex gap-3">
+            <div className="flex flex-1 border border-border rounded-lg bg-ground">
               <select
                 value={method}
                 onChange={(e) => setMethod(e.target.value as HttpMethod)}
-                className={`appearance-none bg-transparent pl-4 pr-10 py-3 font-semibold outline-none cursor-pointer w-full h-full ${getMethodColor(
-                  method,
-                )}`}
+                className={`px-3 py-2 font-semibold bg-transparent outline-none ${getMethodColor(method)}`}
               >
-                {HTTP_METHODS.map((m) => (
-                  <option key={m} value={m} className="text-primary bg-surface">
-                    {m}
-                  </option>
+                {METHODS.map((m) => (
+                  <option key={m}>{m}</option>
                 ))}
               </select>
+
+              <input
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                className="flex-1 px-3 bg-transparent outline-none font-mono"
+              />
             </div>
 
-            <input
-              type="text"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://api.example.com/v1/users"
-              className="flex-1 bg-transparent px-4 py-3 font-mono text-primary outline-none"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSend();
-              }}
-            />
+            <Button onClick={handleSend} isDisabled={loading}>
+              {loading ? "Sending" : "Send"}
+            </Button>
           </div>
 
-          <Button
-            onClick={handleSend}
-            isDisabled={loading || !url.trim()}
-            className="md:w-32 justify-center"
-          >
-            {loading ? "Sending..." : "Send"}
-          </Button>
-        </div>
-
-        {/* HEADERS */}
-        <div className="rounded-lg border border-border bg-surface p-4 space-y-3">
-          <div className="flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-primary">Headers</h4>
-
-            <button
-              onClick={addHeader}
-              className="text-xs px-2 py-1 rounded bg-elevated hover:bg-border"
-            >
-              Add Header
-            </button>
-          </div>
-
-          {headers.map((h, i) => (
-            <div key={i} className="flex gap-2">
-              <input
-                value={h.key}
-                onChange={(e) => updateHeader(i, "key", e.target.value)}
-                placeholder="Key (e.g. Authorization)"
-                className="flex-1 bg-background border border-border rounded px-2 py-1 text-sm"
-              />
-
-              <input
-                value={h.value}
-                onChange={(e) => updateHeader(i, "value", e.target.value)}
-                placeholder="Value"
-                className="flex-1 bg-background border border-border rounded px-2 py-1 text-sm"
-              />
-
+          {/* HEADERS PRESET STYLE */}
+          <div className="space-y-2">
+            <div className="flex justify-between">
+              <p className="text-sm font-medium">Headers</p>
               <button
-                onClick={() => removeHeader(i)}
-                className="px-2 text-danger"
+                onClick={addHeader}
+                className="inline-flex items-center gap-1 rounded-md border border-border bg-surface px-2.5 py-1 text-xs font-medium text-primary transition hover:bg-elevated hover:border-primary/40 active:scale-[0.98]"
               >
-                ×
+                <span>Add header</span>
+                <span className="text-sm">+</span>
               </button>
             </div>
-          ))}
-        </div>
 
-        {hasBody && (
-          <div className="pt-2">
+            <div className="space-y-2">
+              {headers.map((h, i) => (
+                <div key={i} className="flex gap-2">
+                  <input
+                    value={h.key}
+                    onChange={(e) => updateHeader(i, e.target.value, h.value)}
+                    placeholder="key"
+                    className="flex-1 border border-border px-2 py-1 rounded"
+                  />
+                  <input
+                    value={h.value}
+                    onChange={(e) => updateHeader(i, h.key, e.target.value)}
+                    placeholder="value"
+                    className="flex-1 border border-border px-2 py-1 rounded"
+                  />
+                  <button onClick={() => removeHeader(i)}>x</button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {hasBody && (
             <ToolTextarea
-              label="JSON Request Body"
+              label="Body"
               value={reqBody}
               onChange={setReqBody}
-              placeholder='{ "key": "value" }'
               rows={5}
             />
-          </div>
-        )}
-      </div>
-
-      {/* Response Section */}
-      <div className="rounded-xl border border-border bg-surface p-4 md:p-6 min-h-[20rem] flex flex-col">
-        <div className="flex items-center justify-between border-b border-border pb-4 mb-4">
-          <h3 className="text-lg font-semibold text-primary">Response</h3>
-
-          {response && (
-            <div className="flex items-center gap-3 text-sm font-mono">
-              <span
-                className={`px-2.5 py-1 rounded-md border ${getStatusColor(
-                  response.status,
-                )}`}
-              >
-                {response.status === 0
-                  ? "ERROR"
-                  : `${response.status} ${response.statusText}`}
-              </span>
-              <span className="text-muted">{response.timeMs} ms</span>
-            </div>
           )}
         </div>
 
-        <div className="flex-1 relative">
-          {!response && !loading && (
-            <div className="absolute inset-0 flex items-center justify-center text-muted text-sm">
-              Enter a URL and click Send to see the response.
-            </div>
-          )}
+        {/* RESPONSE */}
+        <div className="rounded-xl border border-border bg-surface p-4 md:p-6">
+          <div className="flex justify-between mb-3">
+            <p className="font-medium">Response</p>
 
-          {loading && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-6 w-6 rounded-full border-2 border-accent border-t-transparent animate-spin" />
-            </div>
-          )}
+            {response && (
+              <span className={getStatusColor(response.status)}>
+                {response.status}
+              </span>
+            )}
+          </div>
 
-          {response && !loading && (
+          {response && (
             <ToolTextarea
               value={response.data}
               readOnly
               rows={15}
               rightLabel={<CopyButton value={response.data} />}
             />
+          )}
+        </div>
+      </div>
+      <div className="rounded-xl border border-border bg-surface p-4 h-fit">
+        <div className="flex justify-between mb-3">
+          <p className="font-medium">History</p>
+
+          {history.length > 0 && (
+            <button
+              onClick={() => {
+                setHistory([]);
+                localStorage.removeItem("api_history");
+                setSelectedHistory(null);
+              }}
+              className="text-sm text-danger"
+            >
+              clear
+            </button>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          {history.length === 0 ? (
+            <div className="text-sm text-muted border border-dashed border-border rounded-lg p-4 text-center">
+              No requests yet. Send a request to see history here.
+            </div>
+          ) : (
+            history.map((h, i) => (
+              <div
+                key={i}
+                onClick={() => loadHistory(h, i)}
+                className={`p-2 rounded border cursor-pointer text-xs transition ${
+                  selectedHistory === i
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:bg-surface/50"
+                }`}
+              >
+                <p className="font-semibold">{h.method}</p>
+                <p className="truncate">{h.url}</p>
+              </div>
+            ))
           )}
         </div>
       </div>
