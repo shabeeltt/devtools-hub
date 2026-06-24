@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BcryptGeneratorTool from "../../features/bcrypt-generator/BcryptGeneratorTool";
+---
+
+<BaseLayout
+  title="Bcrypt Generator & Validator | Secure Password Hashing"
+  description="Generate bcrypt hashes from plaintext and verify whether a plaintext value matches an existing bcrypt hash. All operations are performed client-side."
+>
+  <div class="mb-8">
+    <h1 class="mb-2 text-3xl font-bold text-primary">Bcrypt Generator & Validator</h1>
+    <p class="text-secondary">
+      Generate bcrypt hashes with configurable salt rounds and validate plaintext against existing hashes. Runs entirely in your browser.
+    </p>
+  </div>
+
+  <BcryptGeneratorTool client:load />
+</BaseLayout>
