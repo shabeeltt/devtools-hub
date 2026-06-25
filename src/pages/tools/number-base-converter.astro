@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NumberBaseConverter from "../../features/number-base-converter/NumberBaseConverter";
+---
+
+<BaseLayout 
+  title="Number Base Converter | Decimal, Binary, Hex, Octal Converter"
+  description="Convert numbers between Decimal, Binary, Hexadecimal, and Octal bases in real time. Supports BigInt arbitrary precision, prefix inputs, and readable digit grouping."
+>
+  <div class="mb-8">
+    <h2 class="mb-2 text-3xl font-bold tracking-tight text-primary">
+      Number Base Converter
+    </h2>
+    <p class="text-secondary">
+      Convert numbers between Decimal, Binary, Hexadecimal, and Octal bases in real time.
+    </p>
+  </div>
+
+  <NumberBaseConverter client:load />
+</BaseLayout>
