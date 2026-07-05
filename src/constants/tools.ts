@@ -105,7 +105,8 @@ export const tools: Tool[] = [
   },
   {
     name: "Number Base Converter",
-    description: "Convert numbers between Decimal, Binary, Hexadecimal, and Octal in real time.",
+    description:
+      "Convert numbers between Decimal, Binary, Hexadecimal, and Octal in real time.",
     href: "/tools/number-base-converter",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5 5 5-5 5"/><path d="m7 19-5-5 5-5"/></svg>`,
   },
@@ -265,22 +266,23 @@ export const tools: Tool[] = [
   },
   {
     name: "OpenAPI / Swagger Viewer",
-    description: "Parse and view OpenAPI/Swagger specifications visually in an interactive, clean API documentation viewer.",
+    description:
+      "Parse and view OpenAPI/Swagger specifications visually in an interactive, clean API documentation viewer.",
     href: "/tools/openapi-swagger-viewer",
-    
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M8 7h8"/><path d="M8 11h8"/><path d="M8 15h6"/></svg>`,
   },
   {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/><path d="M6 14h10"/></svg>`,
     name: "JWT Generator & Validator",
-    description: "Generate, inspect, decode, and verify JSON Web Tokens directly in your browser.",
+    description:
+      "Generate, inspect, decode, and verify JSON Web Tokens directly in your browser.",
     href: "/tools/jwt-generator-validator",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M8 12h8"/></svg>`,
   },
   {
-  name: "Bcrypt Generator & Validator",
-  description:
-    "Generate bcrypt hashes with configurable salt rounds and validate plaintext against existing hashes. Runs entirely in your browser.",
-  href: "/tools/bcrypt-generator",
-  icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
-},
+    name: "Bcrypt Generator & Validator",
+    description:
+      "Generate bcrypt hashes with configurable salt rounds and validate plaintext against existing hashes. Runs entirely in your browser.",
+    href: "/tools/bcrypt-generator",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+  },
 ];
