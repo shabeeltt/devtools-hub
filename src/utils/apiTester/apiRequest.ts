@@ -1,8 +1,4 @@
-export const HTTP_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"] as const;
-
-export type HttpMethod = (typeof HTTP_METHODS)[number];
-
-export const METHODS_WITH_BODY = new Set<HttpMethod>(["POST", "PUT", "PATCH"]);
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 export type Header = { key: string; value: string };
 
@@ -10,7 +6,7 @@ export interface ApiRequestOptions {
   method: HttpMethod;
   url: string;
   body?: string;
-  headers?: Record<string, string>;
+  headers?: Header[];
 }
 
 export interface ApiResponse {
@@ -21,67 +17,72 @@ export interface ApiResponse {
   isError: boolean;
 }
 
+function normalizeHeaders(headers?: Header[]) {
+  const result: Record<string, string> = {
+    Accept: "application/json",
+  };
+
+  if (!headers) return result;
+
+  for (const h of headers) {
+    if (h.key.trim()) {
+      result[h.key.trim()] = h.value;
+    }
+  }
+
+  return result;
+}
+
 export async function apiRequest(
   options: ApiRequestOptions,
 ): Promise<ApiResponse> {
   const { method, url, body, headers } = options;
 
-  const startTime = performance.now();
+  const start = performance.now();
 
   try {
-    const hasBody = METHODS_WITH_BODY.has(method);
+    const hasBody = ["POST", "PUT", "PATCH"].includes(method);
 
-    const requestHeaders: Record<string, string> = {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      ...(headers || {}),
-    };
-
-    const requestOptions: RequestInit = {
+    const res = await fetch(url, {
       method,
-      headers: requestHeaders,
-    };
+      headers: {
+        "Content-Type": "application/json",
+        ...normalizeHeaders(headers),
+      },
+      body: hasBody && body?.trim() ? body : undefined,
+    });
 
-    if (hasBody && body && body.trim()) {
-      requestOptions.body = body;
-    }
+    const end = performance.now();
 
-    const response = await fetch(url, requestOptions);
+    let data = "";
 
-    const endTime = performance.now();
-    const timeMs = Math.round(endTime - startTime);
+    const contentType = res.headers.get("content-type");
 
-    let dataStr = "";
-
-    const contentType = response.headers.get("content-type");
-
-    if (contentType && contentType.includes("application/json")) {
+    if (contentType?.includes("application/json")) {
       try {
-        const json = await response.json();
-        dataStr = JSON.stringify(json, null, 2);
+        data = JSON.stringify(await res.json(), null, 2);
       } catch {
-        dataStr = await response.text();
+        data = await res.text();
       }
     } else {
-      dataStr = await response.text();
+      data = await res.text();
     }
 
     return {
-      status: response.status,
-      statusText: response.statusText,
-      timeMs,
-      data: dataStr,
-      isError: !response.ok,
+      status: res.status,
+      statusText: res.statusText,
+      timeMs: Math.round(end - start),
+      data,
+      isError: !res.ok,
     };
   } catch (err: any) {
-    const endTime = performance.now();
+    const end = performance.now();
 
     return {
       status: 0,
-      statusText: "Network Error / CORS Issue",
-      timeMs: Math.round(endTime - startTime),
-      data:
-        err?.message || "Failed to fetch. Check network or CORS configuration.",
+      statusText: "Network Error",
+      timeMs: Math.round(end - start),
+      data: err?.message || "Request failed",
       isError: true,
     };
   }
