@@ -1,55 +1,74 @@
-// public/sw.js
+const CACHE_NAME = "devtools-hub-v1";
 
-const CACHE_NAME = 'devtools-hub-v1'
+// cache only safe static assets
+const PRECACHE_ASSETS = ["/", "/icon.png", "/manifest.json"];
 
-// basic assets to cache right away
-const PRECACHE_ASSETS = ['/', '/icon.png', '/manifest.json']
-
-// install event: cache static assets
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(PRECACHE_ASSETS)
+      return cache.addAll(PRECACHE_ASSETS);
     }),
-  )
-  // force the waiting service worker to become the active service worker
-  self.skipWaiting()
-})
+  );
 
-// activate event: clean up old caches
-self.addEventListener('activate', (event) => {
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
-      return Promise.all(cacheNames.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name)))
+      return Promise.all(
+        cacheNames
+          .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name)),
+      );
     }),
-  )
-  self.clients.claim()
-})
+  );
 
-// fetch event: network first, fallback to cache
-self.addEventListener('fetch', (event) => {
-  // only handle GET requests
-  if (event.request.method !== 'GET') return
+  self.clients.claim();
+});
 
-  // skip non-http(s) requests (e.g. chrome-extension://, file://)
-  if (!event.request.url.startsWith('http')) return
+self.addEventListener("fetch", (event) => {
+  const request = event.request;
 
-  // network-first strategy for smooth updates but offline reliability
+  // only GET requests
+  if (request.method !== "GET") return;
+
+  // ignore non-http(s)
+  if (!request.url.startsWith("http")) return;
+
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        // if valid response, clone and cache it
-        if (response && response.status === 200 && response.type === 'basic') {
-          const responseToCache = response.clone()
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache)
-          })
+    (async () => {
+      try {
+        // network first
+        const networkResponse = await fetch(request);
+
+        // only cache valid responses
+        if (networkResponse && networkResponse.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          cache.put(request, networkResponse.clone());
         }
-        return response
-      })
-      .catch(() => {
-        // network failed, fallback to cache
-        return caches.match(event.request)
-      }),
-  )
-})
+
+        return networkResponse;
+      } catch (error) {
+        // fallback to cache
+        const cached = await caches.match(request);
+
+        // IMPORTANT: always return a Response
+        if (cached) return cached;
+
+        // safe fallback for navigation requests only
+        if (request.mode === "navigate") {
+          return new Response("offline", {
+            status: 200,
+            headers: { "Content-Type": "text/plain" },
+          });
+        }
+
+        // final safe fallback
+        return new Response("", {
+          status: 204,
+        });
+      }
+    })(),
+  );
+});

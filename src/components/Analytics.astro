@@ -1,13 +1,11 @@
 ---
 const gaId = import.meta.env.PUBLIC_GA_ID;
 const clarityId = import.meta.env.PUBLIC_CLARITY_ID;
-
 const isProd = import.meta.env.PROD;
 ---
 
 {isProd && gaId && (
   <>
-    <!-- Google Analytics -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
 
     <script is:inline>
@@ -15,22 +13,20 @@ const isProd = import.meta.env.PROD;
       function gtag(){dataLayer.push(arguments);}
 
       gtag('js', new Date());
-      gtag('config', "{gaId}");
+      gtag('config', gaId);
     </script>
   </>
 )}
 
 {isProd && clarityId && (
-  <script is:inline>
-    const CLARITY_ID = "{clarityId}";
-
+  <script is:inline define:vars={{ clarityId }}>
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);
       t.async=1;
-      t.src="https://www.clarity.ms/tag/"+i;
+      t.src="https://www.clarity.ms/tag/" + clarityId;
       y=l.getElementsByTagName(r)[0];
       y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", CLARITY_ID);
+    })(window, document, "clarity", "script");
   </script>
 )}
