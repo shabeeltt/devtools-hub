@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import WordCounterTool from "../../features/word-counter/WordCounter";
+---
+
+<BaseLayout
+  title="Word & Character Counter | Free Online Tool"
+  description="Count characters, words, sentences, and paragraphs in real time, with reading and speaking time estimates. Free, fast, and fully offline-capable."
+>
+  <h2 class="mb-6 text-2xl font-semibold">
+    Word & Character Counter
+  </h2>
+
+  <WordCounterTool client:load />
+</BaseLayout>

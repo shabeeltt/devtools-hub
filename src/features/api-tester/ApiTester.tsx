@@ -29,14 +29,14 @@ const DEFAULT_HEADERS: Header[] = [
   { key: "Accept", value: "application/json" },
 ];
 
+const DEFAULT_METHOD: HttpMethod = "GET";
+const DEFAULT_URL = "https://jsonplaceholder.typicode.com/todos/1";
+const DEFAULT_BODY = '{\n  "title": "foo",\n  "body": "bar",\n  "userId": 1\n}';
+
 export default function ApiTester() {
-  const [method, setMethod] = useState<HttpMethod>("GET");
-  const [url, setUrl] = useState(
-    "https://jsonplaceholder.typicode.com/todos/1",
-  );
-  const [reqBody, setReqBody] = useState(
-    '{\n  "title": "foo",\n  "body": "bar",\n  "userId": 1\n}',
-  );
+  const [method, setMethod] = useState<HttpMethod>(DEFAULT_METHOD);
+  const [url, setUrl] = useState(DEFAULT_URL);
+  const [reqBody, setReqBody] = useState(DEFAULT_BODY);
 
   const [headers, setHeaders] = useState<Header[]>(DEFAULT_HEADERS);
 
@@ -47,6 +47,14 @@ export default function ApiTester() {
   const [selectedHistory, setSelectedHistory] = useState<number | null>(null);
 
   const hasBody = ["POST", "PUT", "PATCH"].includes(method);
+
+  const isDefaultState =
+    method === DEFAULT_METHOD &&
+    url === DEFAULT_URL &&
+    reqBody === DEFAULT_BODY &&
+    response === null &&
+    selectedHistory === null &&
+    JSON.stringify(headers) === JSON.stringify(DEFAULT_HEADERS);
 
   useEffect(() => {
     const saved = localStorage.getItem("api_history");
@@ -83,6 +91,16 @@ export default function ApiTester() {
     });
 
     setLoading(false);
+  };
+
+  const handleClear = () => {
+    setMethod(DEFAULT_METHOD);
+    setUrl(DEFAULT_URL);
+    setReqBody(DEFAULT_BODY);
+    setHeaders(DEFAULT_HEADERS);
+    setResponse(null);
+    setLoading(false);
+    setSelectedHistory(null);
   };
 
   const addHeader = () => {
@@ -160,6 +178,14 @@ export default function ApiTester() {
 
             <Button onClick={handleSend} isDisabled={loading}>
               {loading ? "Sending" : "Send"}
+            </Button>
+
+            <Button
+              onClick={handleClear}
+              variant="secondary"
+              isDisabled={isDefaultState}
+            >
+              Clear
             </Button>
           </div>
 
