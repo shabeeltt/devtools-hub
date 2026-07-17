@@ -292,4 +292,11 @@ export const tools: Tool[] = [
     href: "/tools/word-counter",
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg>`,
   },
+  {
+    name: "HTTP Status Code Reference",
+    description:
+      "Browse and search common HTTP status codes grouped by category, with names and short descriptions.",
+    href: "/tools/http-status-codes",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`,
+  },
 ];
