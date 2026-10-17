@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ImageCompressor from "../../features/image-compressor/ImageCompressor";
+---
+
+<BaseLayout
+  title="Image Compressor | Free Online Tool"
+  description="Compress JPEG, PNG, and WebP images right in your browser with quality control. No upload needed."
+>
+  <h2 class="mb-6 text-2xl font-semibold">Image Compressor</h2>
+
+  <ImageCompressor client:load />
+</BaseLayout>
