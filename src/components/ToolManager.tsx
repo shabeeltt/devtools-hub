@@ -75,7 +75,9 @@ export default function ToolManager({ tools }: { tools: Tool[] }) {
             }
         });
         
-        const result = [{ name: "All" as const, count: counts["All"] }];
+        const result: { name: "All" | Category; count: number }[] = [
+            { name: "All", count: counts["All"] },
+        ];
         CATEGORIES.forEach(c => {
             result.push({ name: c, count: counts[c] });
         });
