@@ -1,9 +1,11 @@
-import { type Tool } from '../constants/tools';
-import { useState, useEffect } from 'react';
+import { type Tool, type Category, CATEGORIES } from '../constants/tools';
+import { useState, useEffect, useMemo } from 'react';
 import ToolCard from './tool/ToolCard';
+import CategoryFilter from '../ui/CategoryFilter';
 
 export default function ToolManager({ tools }: { tools: Tool[] }) {
     const [favoriteTools, setFavoriteTools] = useState<Tool[]>([]);
+    const [activeCategory, setActiveCategory] = useState<Category | "All">("All");
 
     function setFavorites(array: Tool[]){
         localStorage.setItem('favorite_tools', JSON.stringify(array.map(m => m.href)));
@@ -32,6 +34,59 @@ export default function ToolManager({ tools }: { tools: Tool[] }) {
         setFavorites(validatedFavorites);
     }, []);
 
+    useEffect(() => {
+        const syncCategoryFromUrl = () => {
+            const params = new URLSearchParams(window.location.search);
+            const categoryParam = params.get("category");
+            if (categoryParam) {
+                const matchedCategory = CATEGORIES.find(c => c.toLowerCase() === categoryParam.toLowerCase());
+                if (matchedCategory) {
+                    setActiveCategory(matchedCategory);
+                } else {
+                    setActiveCategory("All");
+                }
+            } else {
+                setActiveCategory("All");
+            }
+        };
+
+        syncCategoryFromUrl();
+        window.addEventListener("popstate", syncCategoryFromUrl);
+        return () => window.removeEventListener("popstate", syncCategoryFromUrl);
+    }, []);
+
+    const handleCategorySelect = (category: Category | "All") => {
+        setActiveCategory(category);
+        const url = new URL(window.location.href);
+        if (category === "All") {
+            url.searchParams.delete("category");
+        } else {
+            url.searchParams.set("category", category.toLowerCase());
+        }
+        window.history.pushState(null, "", url.toString());
+    };
+
+    const categoriesWithCounts = useMemo(() => {
+        const counts: Record<string, number> = { All: tools.length };
+        CATEGORIES.forEach(c => counts[c] = 0);
+        tools.forEach(t => {
+            if (t.category && counts[t.category] !== undefined) {
+                counts[t.category]++;
+            }
+        });
+        
+        const result = [{ name: "All" as const, count: counts["All"] }];
+        CATEGORIES.forEach(c => {
+            result.push({ name: c, count: counts[c] });
+        });
+        return result;
+    }, [tools]);
+
+    const displayTools = useMemo(() => {
+        if (activeCategory === "All") return tools;
+        return tools.filter(t => t.category === activeCategory);
+    }, [tools, activeCategory]);
+
     return (
         <div>
             {(favoriteTools.length !== 0) && (
@@ -55,13 +110,18 @@ export default function ToolManager({ tools }: { tools: Tool[] }) {
                 <h2 className="text-3xl font-bold text-primary tracking-tight mb-2">
                     Available Tools
                 </h2>
-                <p className="text-secondary">
+                <p className="text-secondary mb-6">
                     Essential utilities to boost your productivity.
                 </p>
+                <CategoryFilter 
+                    categories={categoriesWithCounts} 
+                    activeCategory={activeCategory} 
+                    onSelect={handleCategorySelect} 
+                />
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {tools.map(tool => <ToolCard isFavorited={favoriteTools.some(t => t.href === tool.href)} key={tool.href} tool={tool} onFavoriteToggle={onFavoriteToggle}></ToolCard>)}
+                {displayTools.map(tool => <ToolCard isFavorited={favoriteTools.some(t => t.href === tool.href)} key={tool.href} tool={tool} onFavoriteToggle={onFavoriteToggle}></ToolCard>)}
             </div>
         </div>
     )

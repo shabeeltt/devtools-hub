@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HttpStatusCodesTool from "../../features/http-status-codes/HttpStatusCodes";
+---
+
+<BaseLayout
+  title="HTTP Status Code Reference | Free Online Tool"
+  description="Browse and search common HTTP status codes grouped by category, with names and short descriptions. Free, fast, and fully offline-capable."
+>
+  <h2 class="mb-6 text-2xl font-semibold">
+    HTTP Status Code Reference
+  </h2>
+
+  <HttpStatusCodesTool client:load />
+</BaseLayout>
