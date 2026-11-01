@@ -1,6 +1,6 @@
 # 🛠️ DevToolsHub
 
-DevToolsHub is a collection of 20+ developer tools built with Astro, React, and Tailwind CSS.
+DevToolsHub is a collection of 40+ developer tools built with Astro, React, and Tailwind CSS.
 
 It provides simple utilities for formatting, converting, generating, testing, and working with common developer data directly in the browser.
 
@@ -145,6 +145,11 @@ You can help by:
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a pull request.
 
 ---
+
+## 🛡️ Community
+
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
+- [Security Policy](./SECURITY.md)
 
 ## 📄 License
 
